@@ -1,0 +1,484 @@
+/* Carrusel Mexico */
+div#container-carousel-mexico {
+   padding: 0 4rem;
+}
+
+.carousel-item-mex {
+   height: 450px !important;
+   background-size: cover !important;
+   background-position: center !important;
+}
+
+.link-read-more {
+   color: #FFF !important;
+   background-color: #94c90d !important;
+   border: 1px solid #94c90d !important;
+   font-weight: 600 !important;
+   text-decoration: none !important;
+   padding: 2px 5px !important;
+   border-radius: 10px !important;
+   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) !important;
+   display: flex !important;
+   flex-direction: column !important;
+   justify-content: center !important;
+   align-items: center !important;
+   text-align: center !important;
+   width: 30% !important;
+   margin: 0 auto !important;
+   transition: all 0.3s ease !important;
+}
+
+.link-read-more:hover {
+   background-color: #7fb00b !important;
+   border-color: #7fb00b !important;
+   color: #FFF !important;
+   text-decoration: none !important;
+   cursor: pointer !important;
+}
+
+.btn-move-carousel-mex:hover {
+   background-color: #7fb00b !important;
+   border-color: #7fb00b !important;
+}
+
+.img-card-carousel {
+   width: 100% !important;
+   height: 100% !important;
+   object-fit: cover !important;
+   border-top-left-radius: 0.25rem;
+   border-top-right-radius: 0.25rem;
+}
+
+.card-title-carousel-mx {
+   font-weight: bold;
+   color: #0090b9 !important;
+   text-align: center;
+   margin-bottom: 5px;
+   font-size: 16px !important;
+}
+
+.card-text-carousel-mx {
+   color: #8dc020 !important;
+   text-align: center;
+   font-size: 14px !important;
+   margin-bottom: 25px;
+}
+
+#carouselMexicoPostCard .card-carousel-mx {
+   height: 100%;              /* Permite alinear tarjetas dentro de la fila */
+   display: flex;
+   flex-direction: column;    /* Para que el contenido interno se acomode verticalmente */
+}
+
+#carouselMexicoPostCard .card-carousel-mx img {
+   height: 250px;             /* Tamaño fijo de imagen */
+   width: 100%;
+   object-fit: cover;
+}
+
+#carouselMexicoPostCard .card-body-carousel-mx {
+   flex: 1 1 auto;            /* Hace que el cuerpo de la tarjeta crezca para igualar altura */
+   display: flex;
+   flex-direction: column;
+   justify-content: space-between; /* Espacio entre título, texto y botón */
+}
+
+.link-read-more {
+   margin-top: auto;          /* Empuja el botón al fondo de la tarjeta */
+   font-weight: bold;
+   color: #007bff;
+   text-decoration: none;
+}
+
+/* Carrusel Mexico */
+
+/* Estilo Propuesta #2 * /
+.cards-wrapper {
+   width: 100%;
+   height: 400px;
+   /*max-width: 1200px;* /
+   overflow-x: hidden;
+   position: relative;
+   margin: 3% 0%;
+}
+
+.cards {
+   position: absolute;
+   top: 15px;
+   left: 50%;
+   transform: translateX(-110px);
+   display: flex;
+   flex-direction: row;
+   /*width: 1300px;* /
+   width: 100%;
+   justify-content: space-between;
+}
+
+.card {
+   width: 280px;
+   height: 600px;
+   border-radius: 14px;
+   border: none;
+   font-family: 'Open Sans', sans-serif;
+   letter-spacing: 0.5px;
+   display: inline;
+   cursor: pointer;
+   box-sizing: border-box;
+   color: #000;
+}
+
+.icon svg {
+   overflow: visible;
+   stroke-width: 1.25em;
+   width: 3em;
+}
+
+.cards-wrapper::after {
+   content: '';
+   display: block;
+   position: absolute;
+   top: 0;
+   width: 100%;
+   /*max-width: 1200px;* /
+   max-width: 100%;
+   /*height: 100%;* /
+   height: 419;
+   background: linear-gradient(90deg, #eee 0%, #ffffff00 30%, #ffffff00 70%, #eee 100%);
+   pointer-events: none;
+}
+
+.arrow-btn {
+   width: 40px;
+   height: 40px;
+   background: #fff;
+   border-radius: 50%;
+   border: none;
+   box-shadow: 0 6px 8px #00000030;
+   position: absolute;
+   top: 50%;
+   left: 20px;
+   transform: translateY(-50%);
+   z-index: 1000;
+   cursor: pointer;
+}
+
+.txt-card-title {
+   font-family: 'Quicksand', 'Roboto', sans-serif !important;
+   font-weight: 600;
+   font-size: 20px !important;
+   margin: 65px 0px 15px 0px !important;
+}
+
+.txt-card-tip-travel {
+   font-family: 'Roboto', 'Quicksand', sans-serif !important;
+   font-size: 13px !important;
+   color: #af616c;
+   padding: 0px 12px !important;
+}
+
+.arrow-btn-next {
+   left: auto;
+   right: 20px;
+}
+
+.arrow-btn svg {
+   fill: #333;
+   position: absolute;
+   height: 80%;
+   left: 50%;
+   top: 50%;
+   transform: translate(-60%, -50%);
+}
+
+.arrow-btn-next svg {
+   transform: translate(-40%, -50%);
+}
+
+/ * Estilo Propuesta #2 */
+
+/* Estilo Propuesta #3 */
+
+#carrousel-tips-travel {
+   color: #8dc020;
+}
+
+.mycard {
+   height: 100%;
+   width: 100%;
+   max-width: 26rem;
+}
+
+.cardtitle {
+   font-weight: bold;
+   color: #0090b9 !important;
+   text-align: center;
+   margin-bottom: 5px;
+}
+
+.cardimg {
+   margin-left: auto;
+   margin-right: auto;
+   margin-top: 0.8rem;
+   margin-bottom: 1rem;
+   /*max-height: 6rem;*/
+   border-radius: 9999px;
+   width: 165px !important;
+   height: 165px !important;
+   object-fit: cover !important;
+}
+
+.carddescription {
+   color: #8dc020 !important;
+   text-align: center;
+   font-size: 14px;
+}
+
+.slider {
+   width: 100%;
+
+   min-height: 395px;
+}
+
+.slider input {
+   display: none;
+}
+
+.testimonials {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   position: relative;
+   min-height: 430px;
+   perspective: 400px;
+   margin-top: 0rem;
+   overflow: hidden;
+}
+
+.testimonials .item {
+   max-width: 20rem;
+   border-radius: 1.5rem;
+   border-width: 2px;
+   --tw-border-opacity: 1;
+   border-color: rgba(30, 58, 138, var(--tw-border-opacity));
+   top: 0;
+   position: absolute;
+   box-sizing: border-box;
+   background-color: #fff;
+   padding: 30px;
+   width: 450px;
+   text-align: center;
+   transition: transform 0.4s;
+   -webkit-transform-style: preserve-3d;
+   /*box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);*/
+   box-shadow: 0px 4px 12px #168BC3;
+   user-select: none;
+   cursor: pointer;
+   margin: 8px;
+}
+
+.testimonials .item img {
+   width: 100px;
+   border-radius: 50%;
+   border: 4px solid #2fa3ca;
+}
+
+.testimonials .item p {
+   color: #0090b9;
+}
+
+.testimonials .item h2 {
+   font-size: 14px;
+}
+
+.dots {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   margin: 3% 5% 3%;
+}
+
+.dots label {
+   display: block;
+   height: 5px;
+   width: 5px;
+   border-radius: 50%;
+   cursor: pointer;
+   background-color: #413b52;
+   margin: 7px;
+   transition: transform 0.2s, color 0.2s;
+}
+
+/* First */
+#t-1:checked~.dots label[for="t-1"] {
+   transform: scale(2);
+   background-color: #1276a6;
+}
+
+#t-1:checked~.dots label[for="t-2"] {
+   transform: scale(1.5);
+}
+
+#t-1:checked~.testimonials label[for="t-1"] {
+   z-index: 4;
+}
+
+#t-1:checked~.testimonials label[for="t-2"] {
+   transform: translateX(300px) translateZ(-90px) translateY(-15px);
+
+   z-index: 3;
+}
+
+#t-1:checked~.testimonials label[for="t-3"] {
+   transform: translateX(600px) translateZ(-180px) translateY(-30px);
+   z-index: 2;
+}
+
+#t-1:checked~.testimonials label[for="t-4"] {
+   transform: translateX(900px) translateZ(-270px) translateY(-45px);
+   z-index: 1;
+}
+
+#t-1:checked~.testimonials label[for="t-5"] {
+   transform: translateX(1200px) translateZ(-360px) translateY(-60px);
+}
+
+/* Second */
+#t-2:checked~.dots label[for="t-1"] {
+   transform: scale(1.5);
+}
+
+#t-2:checked~.dots label[for="t-2"] {
+   transform: scale(2);
+   background-color: #1276a6;
+}
+
+#t-2:checked~.dots label[for="t-3"] {
+   transform: scale(1.5);
+}
+
+#t-2:checked~.testimonials label[for="t-1"] {
+   transform: translateX(-300px) translateZ(-90px) translateY(-15px);
+}
+
+#t-2:checked~.testimonials label[for="t-2"] {
+   z-index: 3;
+}
+
+#t-2:checked~.testimonials label[for="t-3"] {
+   transform: translateX(300px) translateZ(-90px) translateY(-15px);
+   z-index: 2;
+}
+
+#t-2:checked~.testimonials label[for="t-4"] {
+   transform: translateX(600px) translateZ(-180px) translateY(-30px);
+   z-index: 1;
+}
+
+#t-2:checked~.testimonials label[for="t-5"] {
+   transform: translateX(900px) translateZ(-270px) translateY(-45px);
+}
+
+/* Third */
+#t-3:checked~.dots label[for="t-2"] {
+   transform: scale(1.5);
+}
+
+#t-3:checked~.dots label[for="t-3"] {
+   transform: scale(2);
+   background-color: #1276a6;
+}
+
+#t-3:checked~.dots label[for="t-4"] {
+   transform: scale(1.5);
+}
+
+#t-3:checked~.testimonials label[for="t-1"] {
+   transform: translateX(-600px) translateZ(-180px) translateY(-30px);
+}
+
+#t-3:checked~.testimonials label[for="t-2"] {
+   transform: translateX(-300px) translateZ(-90px) translateY(-15px);
+}
+
+#t-3:checked~.testimonials label[for="t-3"] {
+   z-index: 3;
+}
+
+#t-3:checked~.testimonials label[for="t-4"] {
+   transform: translateX(300px) translateZ(-90px) translateY(-15px);
+   z-index: 2;
+}
+
+#t-3:checked~.testimonials label[for="t-5"] {
+   transform: translateX(600px) translateZ(-180px) translateY(-30px);
+}
+
+/* Fourth */
+#t-4:checked~.dots label[for="t-3"] {
+   transform: scale(1.5);
+}
+
+#t-4:checked~.dots label[for="t-4"] {
+   transform: scale(2);
+   background-color: #1276a6;
+}
+
+#t-4:checked~.dots label[for="t-5"] {
+   transform: scale(1.5);
+}
+
+#t-4:checked~.testimonials label[for="t-1"] {
+   transform: translateX(-900px) translateZ(-270px) translateY(-45px);
+}
+
+#t-4:checked~.testimonials label[for="t-2"] {
+   transform: translateX(-600px) translateZ(-180px) translateY(-30px);
+}
+
+#t-4:checked~.testimonials label[for="t-3"] {
+   transform: translateX(-300px) translateZ(-90px) translateY(-15px);
+   z-index: 2;
+}
+
+#t-4:checked~.testimonials label[for="t-4"] {
+   z-index: 3;
+}
+
+#t-4:checked~.testimonials label[for="t-5"] {
+   transform: translateX(300px) translateZ(-90px) translateY(-15px);
+}
+
+/* Fifth */
+#t-5:checked~.dots label[for="t-4"] {
+   transform: scale(1.5);
+}
+
+#t-5:checked~.dots label[for="t-5"] {
+   transform: scale(2);
+   background-color: #1276a6;
+}
+
+#t-5:checked~.testimonials label[for="t-1"] {
+   transform: translateX(-1200px) translateZ(-360px) translateY(-60px);
+}
+
+#t-5:checked~.testimonials label[for="t-2"] {
+   transform: translateX(-900px) translateZ(-270px) translateY(-45px);
+   z-index: 1;
+}
+
+#t-5:checked~.testimonials label[for="t-3"] {
+   transform: translateX(-600px) translateZ(-180px) translateY(-30px);
+   z-index: 2;
+}
+
+#t-5:checked~.testimonials label[for="t-4"] {
+   transform: translateX(-300px) translateZ(-90px) translateY(-15px);
+   z-index: 3;
+}
+
+#t-5:checked~.testimonials label[for="t-5"] {
+   z-index: 4;
+}
+
+/* Estilo Propuesta #3 */
