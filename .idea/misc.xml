@@ -1,0 +1,55 @@
+<project version="4">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_21" default="true" project-jdk-name="jbr-21" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
+  <component name="ProjectUserFactors">
+    <factor id="completionFinishedType">
+      <dailyData date="27-05-2025">
+        <observation name="cancelled" value="1.0" />
+        <observation name="explicitSelect" value="4.0" />
+      </dailyData>
+    </factor>
+    <factor id="completionType">
+      <dailyData date="27-05-2025">
+        <observation name="BASIC" value="4.0" />
+      </dailyData>
+    </factor>
+    <factor id="completionUsage">
+      <dailyData date="27-05-2025">
+        <observation name="count" value="5.0" />
+      </dailyData>
+    </factor>
+    <factor id="itemPosition">
+      <dailyData date="27-05-2025">
+        <observation name="0" value="3.0" />
+        <observation name="1" value="1.0" />
+      </dailyData>
+    </factor>
+    <factor id="mnemonicsUsage">
+      <dailyData date="27-05-2025">
+        <observation name="total" value="4.0" />
+        <observation name="withMnemonics" value="0.0" />
+      </dailyData>
+    </factor>
+    <factor id="prefixLength">
+      <dailyData date="27-05-2025">
+        <observation name="21" value="1.0" />
+        <observation name="27" value="1.0" />
+        <observation name="44" value="1.0" />
+        <observation name="6" value="1.0" />
+      </dailyData>
+    </factor>
+    <factor id="prefixMatchingType">
+      <dailyData date="27-05-2025">
+        <observation name="GREEDY_WITH_CASE" value="1.0" />
+        <observation name="WORDS_FIRST_CHAR" value="2.0" />
+      </dailyData>
+    </factor>
+    <factor id="templatesUsage">
+      <dailyData date="27-05-2025">
+        <observation name="totalStartingWithPrefix" value="4.0" />
+      </dailyData>
+    </factor>
+    <factor id="timeBetweenTyping" />
+  </component>
+</project>
