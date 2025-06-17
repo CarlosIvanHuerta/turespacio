@@ -1,0 +1,33 @@
+services:
+    web:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        container_name: php-apache-container
+        ports:
+            - "80:80" # Redirige el puerto 8080 del host al puerto 80 del contenedor
+        volumes:
+            - ./demo:/var/www/html # Monta el proyecto en el contenedor
+        environment:
+            PHP_INI_DIR: /usr/local/etc/php
+            DB_CHARSET: ${DB_CHARSET} # Asegura que DB_CHARSET se pase como variable de entorno
+        depends_on: # Asegura que el servicio 'db' esté levantado antes de iniciar 'web'
+            - db
+        restart: unless-stopped
+
+    db:
+        image: mariadb:latest
+        container_name: mariadb-container
+        ports:
+            - "3306:3306" # Puerto local (opcional)
+        environment:
+            MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD} # Contraseña de usuario root
+            MYSQL_DATABASE: ${MYSQL_DATABASE} # Nombre de la base de datos
+            MYSQL_USER: ${MYSQL_USER} # Nombre de usuario personalizado
+            MYSQL_PASSWORD: ${MYSQL_PASSWORD} # Contraseña del usuario personalizado
+        volumes:
+            - mariadb_data:/var/lib/mysql # Datos persistentes de MariaDB
+        restart: unless-stopped
+
+volumes:
+    mariadb_data:

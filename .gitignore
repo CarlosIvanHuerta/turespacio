@@ -1,0 +1,8 @@
+/demo/.env
+/demo/php_errors.log
+/demo/api/vendor
+/demo/api/database/generated-classes
+/demo/api/database/schema.xml
+/demo/api/config/propel-config.php
+/demo/api/generated-conf
+/demo/api/composer.lock
