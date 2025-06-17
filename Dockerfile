@@ -15,6 +15,18 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-install gd mysqli pdo pdo_mysql \
     && docker-php-ext-enable mysqli pdo_mysql
 
+RUN apt-get update && apt-get install -y \
+   zip unzip libzip-dev \
+   && docker-php-ext-configure zip \
+   && docker-php-ext-install zip \
+   && docker-php-ext-enable zip
+
+# Instalar Composer
+RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" && \
+    php composer-setup.php --install-dir=/usr/local/bin --filename=composer && \
+    php -r "unlink('composer-setup.php');"
+
+
 # Habilitar mod_rewrite de Apache
 RUN a2enmod rewrite
 

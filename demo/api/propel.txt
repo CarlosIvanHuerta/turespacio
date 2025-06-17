@@ -1,0 +1,16 @@
+#MAC :)
+vendor/bin/propel database:reverse "mysql:host=db;dbname=dbonxlzrrzzd3g;user=usmtcjiraflcy;password=Su1t3Scr1pt@2025%;charset=UTF8" --database-name="dbonxlzrrzzd3g" --output-dir="database"
+vendor/bin/propel model:build --platform="mysql" --config-dir="config" --output-dir="database/generated-classes" --schema-dir="database"
+vendor/bin/propel config:convert --config-dir="config" --output-dir="config" --output-file="propel-config.php"
+
+
+#Linux Server
+vendor/bin/propel database:reverse "mysql:host=127.0.0.1;dbname=dbonxlzrrzzd3g;user=usmtcjiraflcy;password=Su1t3Scr1pt@2025%;charset=UTF8" --database-name="dbonxlzrrzzd3g" --output-dir="database"
+vendor/bin/propel model:build --platform="mysql" --config-dir="config" --output-dir="database/generated-classes" --schema-dir="database"
+vendor/bin/propel config:convert --config-dir="config" --output-dir="config" --output-file="propel-config.php"
+
+#windows :(
+vendor\bin\propel database:reverse "mysql:host=127.0.0.1;dbname=dbonxlzrrzzd3g;user=usmtcjiraflcy;password=Su1t3Scr1pt@2025%;charset=UTF8" --database-name="dbonxlzrrzzd3g" --output-dir="database"
+vendor\bin\propel model:build --platform="mysql" --config-dir="config" --output-dir="database/generated-classes" --schema-dir="database"
+vendor\bin\propel config:convert --config-dir="config" --output-dir="config" --output-file="propel-config.php"
+
