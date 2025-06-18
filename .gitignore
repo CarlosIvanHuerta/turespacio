@@ -6,3 +6,4 @@
 /demo/api/config/propel-config.php
 /demo/api/generated-conf
 /demo/api/composer.lock
+/demo/adminsite/app/node_modules

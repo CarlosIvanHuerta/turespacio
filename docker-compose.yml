@@ -6,6 +6,7 @@ services:
         container_name: php-apache-container
         ports:
             - "80:80" # Redirige el puerto 8080 del host al puerto 80 del contenedor
+            - "5173:5173" # Redirige el puerto 8080 del host al puerto 80 del contenedor
         volumes:
             - ./demo:/var/www/html # Monta el proyecto en el contenedor
         environment:

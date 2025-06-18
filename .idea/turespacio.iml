@@ -4,6 +4,9 @@
     <exclude-output />
     <content url="file://$MODULE_DIR$">
       <excludeFolder url="file://$MODULE_DIR$/.idea/dataSources" />
+      <excludeFolder url="file://$MODULE_DIR$/demo/api/database/generated-classes" />
+      <excludeFolder url="file://$MODULE_DIR$/demo/api/generated-conf" />
+      <excludeFolder url="file://$MODULE_DIR$/demo/api/vendor" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
