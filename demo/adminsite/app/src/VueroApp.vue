@@ -18,7 +18,7 @@ const rtlCodes = [
 ]
 
 useHead(() => ({
-  title: 'Vuero - Vue 3 Admin and Webapp UI Kit',
+  title: 'TURESPACIO - Vue 3 Admin',
   link: [
     {
       rel: 'icon',
@@ -68,12 +68,12 @@ useHead(() => ({
     {
       name: 'description',
       content:
-        'Vuero is more than a dashboard template, it is design system built with Vue, Bulma and Typescript. It ships with more than 200+ demo pages and a components.',
+        'turespacio sitio que te mostrará el mejor destino, para tus próximas vacaciones.',
     },
     // Open Graph
     {
       property: 'og:site_name',
-      content: 'Vuero by Css Ninja',
+      content: 'turespacio red para tus próximas vacaciones',
     },
     {
       property: 'og:locale',
@@ -102,7 +102,7 @@ useHead(() => ({
     {
       property: 'og:image',
       content:
-        'https://media.cssninja.io/embed/marketplace/product/wide.png?headline=Vue%203%20Admin%20and%20Webapp%20UI%20Kit&url=https%3A%2F%2Fcdn.schema.io%2Fcssninja%2F62671c0f1bfb2b0019e066aa%2F5badfba048f6ec5250e5e1a4e35cc5d2&previewUrl=https%3A%2F%2Fcdn.schema.io%2Fcssninja%2F62509cb6c752bf01326ee966%2Fa0c4a94938866331845447c595aacef2',
+        'https://turespacio.com/inv/tlogo.png',
     },
     // Twitter
     {

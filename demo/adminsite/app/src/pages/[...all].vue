@@ -16,7 +16,7 @@ import { useSSRContext } from 'vue'
 const { t } = useI18n()
 
 useHead({
-  title: `${t('pages.not-found.page-title')} - Vuero`,
+  title: `${t('pages.not-found.page-title')} - TURESPACIO`,
   meta: [
     {
       name: 'robots',

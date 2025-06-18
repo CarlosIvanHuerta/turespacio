@@ -228,8 +228,8 @@ export default defineConfig(({ isSsrBuild }) => ({
       base: '/',
       includeAssets: ['favicon.svg', 'favicon.ico', 'robots.txt', 'apple-touch-icon.png'],
       manifest: {
-        name: 'Vuero - A complete Vue 3 design system',
-        short_name: 'Vuero',
+        name: 'turespacio - Vue 3 sitio para tus próximas vacaciones',
+        short_name: 'turespacio',
         start_url: '/?utm_source=pwa',
         display: 'standalone',
         theme_color: '#ffffff',
