@@ -8,6 +8,56 @@ const panels = usePanels()
 
 const links = ref<SidebarItem[]>([
   {
+    id: 'admin',
+    label: 'Administración',
+    icon: 'vscode-icons:file-type-config',
+    type: 'subsidebar',
+    subsidebar: {
+      label: 'Administración',
+      items: [
+        {
+          type: 'collapse',
+          id: 'usuarios',
+          label: 'Usuarios',
+          children: [
+            {
+              label: 'Administración',
+              to: '/sidebar/dashboards',
+              icon: 'lnil lnil-users-alt',
+            },
+            {
+              label: 'Roles',
+              to: '/sidebar/dashboards/personal-2',
+              icon: 'lnil lnil-bookmark-alt',
+            },
+            {
+              label: 'Permisos',
+              to: '/sidebar/dashboards/personal-3',
+              icon: 'lnil lnil-file-lock',
+            },
+          ],
+        },
+        {
+          type: 'collapse',
+          id: 'posts',
+          label: 'Posteos',
+          children: [
+            {
+              label: 'Administración',
+              to: '/sidebar/dashboards/analytics',
+              icon: 'lnil lnil-page',
+            },
+            {
+              label: 'Registrar',
+              to: '/posteos/registro',
+              icon: 'lnil lnil-ruler-pencil',
+            }
+          ],
+        },
+      ],
+    },
+  },
+  {
     id: 'dashboard',
     label: 'Dashboards',
     icon: 'lucide:activity',

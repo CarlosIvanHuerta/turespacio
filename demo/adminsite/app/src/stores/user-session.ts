@@ -4,11 +4,12 @@ import { computed, ref } from 'vue'
 export type UserData = Record<string, any>
 
 export const useUserSession = defineStore('userSession', () => {
-  const user = ref<Partial<UserData>>()
+  const user = useStorage('user', {})
+  const token = useUserToken()
+  const roleUser = useStorage('roleUser', '')
+  const isLoggedIn = useStorage('isLoggedIn', false)
 
-  const isLoggedIn = computed(() => user.value !== undefined)
-
-  function setUser(newUser: Partial<UserData>) {
+  function setUser(newUser: {}) {
     user.value = newUser
   }
 
@@ -16,13 +17,27 @@ export const useUserSession = defineStore('userSession', () => {
     const token = useUserToken()
     token.value = undefined
     user.value = undefined
+    roleUser.value = ''
+    isLoggedIn.value = false
+  }
+
+  async function setTokenUser(newToken: string) {
+    token.value = newToken
+    isLoggedIn.value = true
+  }
+  async function setRoleUser(newRole: string) {
+    roleUser.value = newRole
   }
 
   return {
     user,
     isLoggedIn,
+    roleUser,
+    token,
     logoutUser,
     setUser,
+    setTokenUser,
+    setRoleUser
   } as const
 })
 

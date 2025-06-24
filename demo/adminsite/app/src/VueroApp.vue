@@ -22,13 +22,13 @@ useHead(() => ({
   link: [
     {
       rel: 'icon',
-      href: '/favicon.svg',
-      type: 'image/svg+xml',
+      href: '/favicon.png',
+      type: 'image/png',
     },
     {
       rel: 'alternate icon',
-      href: '/favicon.ico',
-      type: 'image/x-icon',
+      href: '/favicon.png',
+      type: 'image/png',
       sizes: '16x16',
     },
     {
@@ -39,8 +39,8 @@ useHead(() => ({
     },
     {
       rel: 'mask-icon',
-      href: '/favicon.svg',
-      type: 'image/svg+xml',
+      href: '/favicon.png',
+      type: 'image/png',
       color: '#FFFFFF',
     },
   ],

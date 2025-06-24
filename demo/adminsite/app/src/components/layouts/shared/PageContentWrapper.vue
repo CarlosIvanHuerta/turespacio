@@ -19,7 +19,7 @@ const props = withDefaults(defineProps<{
 
 .page-content-wrapper {
   width: 100%;
-  max-width: 1200px;
+  /*max-width: 1200px;*/
   margin: 0 auto;
 
   &.is-size-default {
@@ -67,7 +67,7 @@ const props = withDefaults(defineProps<{
 @media only screen and (width >= 1408px) {
   .page-content-wrapper {
     &.is-size-large {
-      max-width: 1380px;
+      /*max-width: 1380px;*/
     }
 
     &.is-size-wide {

@@ -107,13 +107,6 @@ export default defineConfig(({ isSsrBuild }) => ({
   },
   plugins: [
     /**
-     * Shows a quick overview of your app, including the Vue version, pages and components.
-     *
-     * @see https://devtools-next.vuejs.org/
-     */
-    DevTools(),
-
-    /**
      * unplugin-vue-router plugin generate routes based on file system
      * allow to use typed routes and usage of defineLoader
      *
@@ -123,7 +116,6 @@ export default defineConfig(({ isSsrBuild }) => ({
       routesFolder: 'src/pages',
       dts: './types/router.d.ts',
     }),
-
     /**
      * plugin-vue plugin inject vue library and allow sfc files to work (*.vue)
      *
@@ -137,7 +129,6 @@ export default defineConfig(({ isSsrBuild }) => ({
         },
       },
     }),
-
     /**
      * unplugin-vue-i18n plugin does i18n resources pre-compilation / optimizations
      *
@@ -148,14 +139,12 @@ export default defineConfig(({ isSsrBuild }) => ({
       fullInstall: false,
       compositionOnly: true,
     }),
-
     /**
      * Unhead provides a Vite plugin to optimise your builds, by removing composables that aren't needed and simplifying your code.
      *
      * @see https://unhead.unjs.io/docs/vue/head/guides/advanced/vite-plugin
      */
     Unhead(),
-
     /**
      * unplugin-auto-import allow to automaticaly import modules/components
      *
@@ -172,7 +161,6 @@ export default defineConfig(({ isSsrBuild }) => ({
       ],
       dirs: ['src/composables', 'src/stores', 'src/utils'],
     }),
-
     /**
      * This is an internal vite plugin that load markdown files as vue components.
      *
@@ -195,14 +183,12 @@ export default defineConfig(({ isSsrBuild }) => ({
         editProtocol: 'vscode://vscode-remote/wsl+Ubuntu', // or 'vscode://file'
       },
     }),
-
     /**
      * This is an internal vite plugin that remove html comments from code.
      *
      * @see /vite-plugin/purge-comments
      */
     PurgeComments(),
-
     /**
      * unplugin-vue-components plugin is responsible of autoloading components
      * documentation and md file are loaded for elements and components sections
@@ -218,7 +204,6 @@ export default defineConfig(({ isSsrBuild }) => ({
       dts: './types/components.d.ts',
       include: [/\.vue$/, /\.vue\?vue/, /\.md$/],
     }),
-
     /**
      * vite-plugin-pwa generate manifest.json and register services worker to enable PWA
      *
@@ -265,7 +250,6 @@ export default defineConfig(({ isSsrBuild }) => ({
         globPatterns: ['**/*.{ico,js,mjs,css,html}'],
       },
     }),
-
     /**
      * rollup-plugin-purgecss plugin is responsible of purging css rules
      * that are not used in the bundle
@@ -290,6 +274,12 @@ export default defineConfig(({ isSsrBuild }) => ({
         return contentWithoutStyleBlocks.match(/[\w\-/:]*[\w\-/]/g) || []
       },
     }),
+    /**
+     * Shows a quick overview of your app, including the Vue version, pages and components.
+     *
+     * @see https://devtools-next.vuejs.org/
+     */
+    DevTools(),
   ],
   // Predefine dependencies in order to prevent reloading them in the browser during development.
   optimizeDeps: {

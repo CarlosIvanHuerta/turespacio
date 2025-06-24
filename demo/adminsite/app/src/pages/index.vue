@@ -1,6 +1,13 @@
 <script setup lang="ts">
 import packageJson from '../../package.json'
 import Layout from '/@src/layouts/landing.vue'
+definePage({
+  meta: {
+    requiresAuth: true,
+  }, // Aquí todo debería estar correctamente cerrado.
+})
+
+
 
 const activeTab = ref<'components' | 'forms' | 'plugins'>('components')
 

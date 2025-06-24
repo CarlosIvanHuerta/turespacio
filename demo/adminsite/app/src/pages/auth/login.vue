@@ -1,37 +1,104 @@
 <script setup lang="ts">
+import { toTypedSchema } from "@vee-validate/zod"
+import { useForm, useField } from "vee-validate"
+import { ref } from "vue"
+import { z } from "zod"
+import { useNotyf } from "/@src/composables/notyf.ts"
+
 type StepId = 'login' | 'forgot-password'
 const step = ref<StepId>('login')
 const isLoading = ref(false)
 const router = useRouter()
 const route = useRoute()
 const notyf = useNotyf()
-const token = useUserToken()
+const userSession = useUserSession()
+const api = createApi()
 const redirect = route.query.redirect as string
+const zodSchema = z.object({
+  email: z
+      .string({
+        required_error: "Ingrese su usuario",
+      })
+      .email("Debe ingresar un email válido"),
+  password: z
+      .string({
+        required_error: "Ingrese su password",
+      })
+      .min(6, "Al menos 6 caracteres"),
+})
+type FormInput = z.infer<typeof zodSchema>;
+const validationSchema = toTypedSchema(zodSchema);
+const initialValues = computed<FormInput>(() => ({
+  email: "",
+  password: "",
+}))
+const { handleSubmit, errors } = useForm({
+  validationSchema,
+  initialValues,
+})
+const { value: email, meta: emailMeta } = useField("email")
+const { value: password, meta: passwordMeta } = useField("password")
 
-async function handleLogin() {
+const handleLogin = handleSubmit(async (values) => {
   if (!isLoading.value) {
-    isLoading.value = true
-
-    await sleep(2000)
-    console.log('set token logged-in')
-    token.value = 'logged-in'
-
-    notyf.dismissAll()
-    notyf.primary('Welcome back, Erik Kovalsky')
-
-    if (redirect) {
-      router.push(redirect)
-    }
-    else {
-      router.push('/sidebar/dashboards')
-    }
-
-    isLoading.value = false
+    isLoading.value = true;
   }
-}
+
+  await api
+      .post("auth/login", values)
+      .then(async ({data}) => {
+        console.log(data)
+        if (data.Success) {
+          userSession.setUser(data.user)
+          await userSession.setTokenUser(data.token)
+          await userSession.setRoleUser(data.role)
+          notyf.success({
+            message:
+                "Bienvenido de nuevo, " +
+                userSession.user?.nickname,
+            duration: 3000,
+            position: {
+              x: 'center',
+              y: 'center',
+            },
+            icon: {
+              className: 'fas fa-user-check',
+              tagName: 'i',
+              text: '',
+            },
+          })
+
+          if (userSession.roleUser === 'administrador') {
+            await router.push("/dashboard/site");
+          }
+          else {
+            await router.push("/sidebar/inicio")
+          }
+        }
+        else {
+          notyf.error({
+            message:data.Mensaje,
+            duration: 3000,
+            position: {
+              x: 'center',
+              y: 'center',
+            }
+          })
+        }
+      })
+      .catch((err) => {
+        notyf.error({
+          message: err,
+          duration: 6000,
+        });
+      })
+      .finally(() => {
+        isLoading.value = false;
+      })
+})
 
 useHead({
-  title: 'Auth Login 1 - Vuero',
+  title: 'Iniciar Sesión - turespacio',
 })
 </script>
 
@@ -45,11 +112,25 @@ useHead({
           <div class="hero-body">
             <div class="container">
               <div class="columns">
+                <div class="column text-center">
+                  <img
+                      class="light-image-block hero-image-logo"
+                      src="/images/logos/logo/tlogocolor.png"
+                      alt=""
+                  >
+                  <img
+                      class="dark-image-block hero-image-logo"
+                      src="/images/logos/logo/tlogocolorwhite.png"
+                      alt=""
+                  >
+                </div>
+              </div>
+              <div class="columns">
                 <div class="column">
                   <img
                     class="hero-image"
-                    src="/images/illustrations/login/station.svg"
-                    alt=""
+                    src="/images/photo/login/imageone.jpg"
+                    alt="logoviaje"
                   >
                 </div>
               </div>
@@ -63,10 +144,7 @@ useHead({
             to="/"
             class="top-logo"
           >
-            <AnimatedLogo
-              width="38px"
-              height="38px"
-            />
+            <img class="img is-128x128" src="/favicon.png" alt="logo"></img>
           </RouterLink>
 
           <VDarkmodeToggle />
@@ -77,15 +155,14 @@ useHead({
               class="form-text"
               :class="[step !== 'login' && 'is-hidden']"
             >
-              <h2>Sign In</h2>
-              <p>Welcome back to your account.</p>
+              <h2 class="has-text-centered">Iniciar Sesión</h2>
             </div>
             <div
               class="form-text"
               :class="[step === 'login' && 'is-hidden']"
             >
-              <h2>Recover Account</h2>
-              <p>Reset your account password.</p>
+              <h2>Recuperar cuenta</h2>
+              <p>Verifica tu identidad.</p>
             </div>
             <form
               method="post"
@@ -94,100 +171,45 @@ useHead({
               class="login-wrapper"
               @submit.prevent="handleLogin"
             >
-              <VMessage color="primary">
-                <div>
-                  <strong class="pr-1">email:</strong>
-                  <span>john.doe@cssninja.io</span>
-                </div>
-                <div>
-                  <strong class="pr-1">password:</strong>
-                  <span>ada.lovelace</span>
-                </div>
-              </VMessage>
-
               <VField>
-                <VControl icon="lnil lnil-envelope autv-icon">
-                  <VLabel class="auth-label">
-                    Email Address
-                  </VLabel>
-                  <VInput
-                    type="email"
-                    autocomplete="current-password"
-                  />
+                <VLabel>Email de acceso</VLabel>
+                <VControl :is-valid="emailMeta.valid" :has-error="!emailMeta.valid
+                                                    " icon="lucide:user">
+                  <VInput v-model="email" type="text" placeholder=""
+                          autocomplete="" />
+                  <span class="help is-danger">{{
+                      errors.email
+                    }}</span>
                 </VControl>
               </VField>
               <VField>
-                <VControl icon="lnil lnil-lock-alt autv-icon">
-                  <VLabel class="auth-label">
-                    Password
-                  </VLabel>
-                  <VInput
-                    type="password"
-                    autocomplete="current-password"
-                  />
+                <VLabel>Contraseña</VLabel>
+                <VControl :is-valid="passwordMeta.valid
+                                                    " :has-error="!passwordMeta.valid
+                                                        " icon="lucide:lock">
+                  <VInput v-model="password" type="password" placeholder=""
+                          autocomplete="" />
+                  <span class="help is-danger">{{
+                      errors.password
+                    }}</span>
                 </VControl>
               </VField>
-
               <VField>
                 <VControl class="is-flex">
-                  <VLabel
-                    raw
-                    class="remember-toggle"
-                  >
-                    <VInput
-                      raw
-                      type="checkbox"
-                    />
-
-                    <span class="toggler">
-                      <span class="active">
-                        <VIcon
-                          icon="lucide:check"
-                        />
-                      </span>
-                      <span class="inactive">
-                        <VIcon
-                          icon="lucide:circle"
-                        />
-                      </span>
-                    </span>
-                  </VLabel>
-                  <VLabel
-                    raw
-                    class="remember-me"
-                  >
-                    Remember Me
-                  </VLabel>
                   <a
                     tabindex="0"
                     role="button"
                     @keydown.enter.prevent="step = 'forgot-password'"
                     @click="step = 'forgot-password'"
                   >
-                    Forgot Password?
+                    ¿Problemas para ingresar?
                   </a>
                 </VControl>
               </VField>
-
-              <div class="button-wrap has-help">
-                <VButton
-                  id="login-button"
-                  :loading="isLoading"
-                  color="primary"
-                  type="submit"
-                  size="big"
-                  rounded
-                  raised
-                  bold
-                >
-                  Confirm
-                </VButton>
-                <span>
-                  Or
-                  <RouterLink to="/auth/signup-1">Create</RouterLink>
-                  an account.
-                </span>
-              </div>
+              <VButton :loading="isLoading" type="submit" color="primary"
+                       icon="line-md:account" bold fullwidth raised>
+                Inicia Sesión
+              </VButton>
             </form>
 
             <form
@@ -198,33 +220,32 @@ useHead({
               @submit.prevent
             >
               <p class="recover-text">
-                Enter your email and click on the confirm button to reset your password.
-                We'll send you an email detailing the steps to complete the procedure.
+                Ingresa tu email de acceso, para enviar el link de recuperación, y poder ingresar a nuestro portal
               </p>
-
+              <br>
               <VField>
-                <VControl icon="lnil lnil-envelope autv-icon">
-                  <VLabel class="auth-label">
-                    Email Address
-                  </VLabel>
+                <VLabel class="auth-label">
+                  Email de acceso
+                </VLabel>
+                <VControl icon="lucide:user">
                   <VInput
                     type="email"
-                    autocomplete="current-password"
+                    autocomplete="current-email"
                   />
                 </VControl>
               </VField>
               <div class="button-wrap">
                 <VButton
-                  color="white"
+                  color="danger"
                   size="big"
                   lower
                   rounded
                   @click="step = 'login'"
                 >
-                  Cancel
+                  Cancelar
                 </VButton>
                 <VButton
-                  color="primary"
+                  color="success"
                   size="big"
                   type="submit"
                   lower
@@ -232,7 +253,7 @@ useHead({
                   solid
                   @click="step = 'login'"
                 >
-                  Confirm
+                  Confirmar
                 </VButton>
               </div>
             </form>
@@ -320,6 +341,15 @@ useHead({
     position: relative;
     border-inline-end: 1px solid var(--fade-grey);
 
+    .hero-image-logo {
+      position: relative;
+      z-index: 2;
+      display: block;
+      margin: -140px auto 0;
+      max-width: 20%;
+      width: 20%;
+
+    }
     .hero-image {
       position: relative;
       z-index: 2;
@@ -369,23 +399,7 @@ useHead({
         width: 100%;
         margin-top: 16px;
 
-        .input {
-          padding-top: 14px;
-          height: 60px;
-          border-radius: 10px;
-          padding-inline-start: 55px;
-          transition: all 0.3s; // transition-all test
 
-          &:focus {
-            background: color-mix(in oklab, var(--fade-grey), white 6%);
-            border-color: var(--placeholder);
-
-            ~ .auth-label,
-            ~ .autv-icon .iconify {
-              color: var(--muted-grey);
-            }
-          }
-        }
 
         .error-text {
           color: var(--danger);

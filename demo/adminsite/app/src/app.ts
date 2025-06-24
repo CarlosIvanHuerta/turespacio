@@ -5,16 +5,18 @@ import { InferSeoMetaPlugin } from '@unhead/addons'
 import { createHead as createClientHead } from '@unhead/vue/client'
 import { createHead as createSSRHead } from '@unhead/vue/server'
 import { createPinia } from 'pinia'
-
+import mitt from 'mitt'
 import { createApp as createClientApp, createSSRApp } from 'vue'
 import '/@src/styles'
 import { createRouter } from '/@src/router'
 import VueroApp from '/@src/VueroApp.vue'
+import vSelect from 'vue-select'
+import 'vue-select/dist/vue-select.css'
 
 const plugins = import.meta.glob<{ default?: VueroPlugin }>('./plugins/*.ts', {
   eager: true,
 })
-
+const emitter = mitt()
 export async function createApp(event?: H3Event) {
   const app = __VUERO_SSR_BUILD__
     ? createSSRApp(VueroApp)
@@ -31,7 +33,7 @@ export async function createApp(event?: H3Event) {
       })
 
   app.use(head)
-
+  app.provide('emitter', emitter)
   const pinia = createPinia()
 
   // restore pinia state from SSR if any, before loading plugins
@@ -43,7 +45,7 @@ export async function createApp(event?: H3Event) {
   }
 
   app.use(pinia)
-
+  app.component('select-v', vSelect)
   const vuero: VueroAppContext = {
     app,
     router,

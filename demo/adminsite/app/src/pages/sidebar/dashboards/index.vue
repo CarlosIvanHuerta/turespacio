@@ -9,8 +9,13 @@ onMounted(() => {
 useHead(() => ({
   title: `${t('pages.dashboard-personnal-1.page-title')} - Sidebar - Vuero`,
 }))
+definePage({
+  meta: {
+    requiresAuth: true,
+  }, // Aquí todo debería estar correctamente cerrado.
+})
 </script>
 
 <template>
-  <PersonalDashboardV1 />
+
 </template>
