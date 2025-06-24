@@ -113,9 +113,10 @@ const renderCarouselTips = (data) => {
          const card = document.createElement('div')
          card.classList.add('mycard')
 
-         const title = document.createElement('p')
+         const title = document.createElement('a')
          title.classList.add('cardtitle')
          title.textContent = post.post_title
+         title.href = `${post.post_name}` // Asegurarse de que el enlace sea correcto
 
          const img = document.createElement('img')
          //img.src = 'https://i.pravatar.cc/200'
@@ -154,7 +155,7 @@ const renderCarouselTips = (data) => {
 
 const renderCarouselMexico = (data) => {
    try {
-      console.log(`${JSON.stringify(data)}`);
+      //console.log(`${JSON.stringify(data)}`);
 
       const container = document.querySelector('#carouselMexicoPostCard .carousel-inner')
       container.innerHTML = ''
@@ -179,11 +180,11 @@ const renderCarouselMexico = (data) => {
          cardCol.className = 'col-md-4';
          cardCol.innerHTML = `
          <div class="card card-carousel-mx">
-            <img class="img-fluid img-card-carousel" alt="Imagen del post" src="${post.thumbnail_url}">
+            <img class="img-card-carousel" alt="Imagen del post" src="${post.thumbnail_url}">
             <div class="card-body card-body-carousel-mx">
                <h4 class="card-title card-title-carousel-mx">${post.post_title}</h4>
                <p class="card-text card-text-carousel-mx">${truncateText(postContent, 120)}</p>
-               <a href="/${post.slug}/${post.ID}" class="link-read-more">Más</a>
+               <a href="${post.post_name}" class="link-read-more">Más</a>
             </div>
          </div>
       `;
@@ -197,7 +198,7 @@ const renderCarouselMexico = (data) => {
 
 const renderSliderMain = (data) => {
    try {
-      console.log(`${JSON.stringify(data)}`);
+      //console.log(`${JSON.stringify(data)}`);
 
       const indicators = document.getElementById('carousel-indicators-main')
       const inner = document.getElementById('carousel-inner-main')

@@ -62,8 +62,8 @@ footer {
    top: 50%;
    width: 100%;
    height: 0;
-   border-top: 1px solid #0090b9;
-   border-bottom: 1px solid #0090b9;
+   border-top: 1px solid #065292;
+   border-bottom: 1px solid #065292;
    line-height: 0;
    margin-bottom: 0.4em;
 }
@@ -87,7 +87,7 @@ footer {
 }
 
 #newsletter-title {
-   color: #8DC020;
+   color: #78B53C;
    font-weight: 700;
    font-size: 35px;
    font-family: sans-serif;
@@ -95,23 +95,59 @@ footer {
 
 #newsletter-content-01,
 #newsletter-joinus-01 {
-   color: #0090b9;
+   color: #065292;
    font-size: 22px;
 }
 
 #newsletter-join-action {
    width: 60%;
    border-radius: 20px;
-   border: 1px solid #0090b9;
+   border: 1px solid #065292;
    background-color: #fff;
-   color: #0090b9;
+   color: #065292;
    transition: all 1s;
 }
 
 #newsletter-join-action:hover {
-   background-color: #8DC020;
-   border-color: #8DC020;
+   background-color: #78B53C;
+   border-color: #78B53C;
    color: #fff;
+}
+
+.kajabi-form--inline {
+   padding-block: 20px !important;
+   background-color: #fff;
+   margin-top: 28% !important;
+}
+
+.kajabi-form__title {
+   color: #065292 !important;
+   text-transform: uppercase !important;
+   font-family: 'Quicksand', 'Roboto', sans-serif !important;
+}
+
+.kajabi-form__subtitle p {
+   color: #78B53C !important;
+   font-family: 'Montserrat';
+   font-weight: 300;
+}
+
+#kajabi-form .kajabi-form__content {
+   max-width: 65% !important;
+   text-align: center !important;
+}
+
+#kajabi-form .kajabi-form__subtitle p {
+   text-align: center !important;
+}
+
+button.kajabi-form__btn.kajabi-form__btn--block-mobile {
+   max-width: 100% !important;
+   width: 100% !important;
+}
+
+#kajabi-form .kajabi-form__btn {
+   background-color: #065292 !important;
 }
 
 @media (min-width: 1440px) and (max-width: 1919px) {
@@ -235,6 +271,24 @@ footer {
    font-weight: 300;
 }
 
+.about-us-header {
+   color: #065292 !important;
+   text-align: center;
+   margin: 0 auto;
+   padding: 30px 0 15px;
+   text-transform: uppercase;
+   letter-spacing: 6px;
+   font-family: 'Quicksand', 'Roboto', sans-serif !important;
+   margin: auto 15%;
+}
+
+.about-us-subtitle {
+   color: #78B53C;
+   font-family: 'Montserrat';
+   font-weight: 300;
+   padding: 0 15%;
+}
+
 @media (max-width: 1024px) {
    .col {
       width: calc(33.333% - 2rem);
@@ -259,6 +313,27 @@ footer {
    CONTACTO Y FORMULARIO
    ===================== */
 /* Contacto */
+/* Contact Section */
+.container-contact{
+   background-color: #0a5397;
+   padding-bottom: 2rem;
+}
+
+#messageHeader{
+   background-color: #79ba37;
+   text-align: center;
+   font-size: 20px;
+   color: #FFF;
+   padding: 15px 0;
+   margin-bottom: 0px;
+}
+
+.link-li-social-media{
+   background-color: #FFF;
+   border-radius: 50%;
+   padding: 10px;
+}
+
 #contact {
    width: 100%;
    height: 100%;
@@ -266,12 +341,13 @@ footer {
 }
 
 .section-header {
+   color: #FFF !important;
    text-align: center;
    margin: 0 auto;
    padding: 40px 0;
-   color: #0090b9;
    text-transform: uppercase;
    letter-spacing: 6px;
+   font-family: 'Quicksand', 'Roboto', sans-serif !important;
 }
 
 .contact-wrapper {
@@ -297,18 +373,20 @@ textarea {
    background-color: #fff;
    color: #545454;
    letter-spacing: 1px;
-   border: 1px solid #8DC020;
+   /*border: 1px solid #78B53C;*/
    resize: none;
+   border-radius: 0px;
 }
 
 .send-button {
-   margin-top: 15px;
+   margin-top: 0px;
    height: 34px;
    width: 400px;
    overflow: hidden;
    transition: all .2s ease-in-out;
-   background-color: #8DC020;
+   background-color: #78B53C;
    border: 0px;
+   border-radius: 0px;
 }
 
 .alt-send-button {
@@ -324,7 +402,7 @@ textarea {
 }
 
 .send-button:hover {
-   background-color: #8DC020 !important;
+   background-color: #78B53C !important;
 }
 
 .alt-send-button:hover {
@@ -345,7 +423,7 @@ textarea {
 
 .list-item {
    line-height: 4;
-   color: #0090b9;
+   color: #065292;
 }
 
 .contact-text {
@@ -390,7 +468,8 @@ textarea {
 }
 
 .social-media-list li a {
-   color: #fff;
+   color: #0a5397;
+   font-size: 2rem;
 }
 
 .social-media-list li {
@@ -399,18 +478,21 @@ textarea {
    height: 60px;
    width: 60px;
    margin: 10px 3px;
-   line-height: 60px;
+   line-height: 42px;
    border-radius: 50%;
-   color: #fff;
-   background-color: #8DC020;
+   color: #0a5397;
+   /*background-color: #78B53C;*/
    cursor: pointer;
    transition: all .2s ease-in-out;
 }
 
+/*
 .social-media-list .link-li-social-media:hover {
-   background-color: #1276a6;
+   background-color: #FFF;
 }
+*/
 
+/*
 .social-media-list li:hover:after {
    opacity: 1;
    transform: scale(1.12);
@@ -418,8 +500,14 @@ textarea {
 }
 
 .social-media-list li:hover a {
-   color: #000;
+   color: #FFF;
 }
+*/
+
+.container-social-links{
+   margin-top: 20%;
+}
+
 
 .copyright {
    color: #555;
@@ -429,6 +517,20 @@ textarea {
 
 hr {
    border-color: rgba(255, 255, 255, .6);
+}
+
+#img-contact-logo-white{
+   width: 95%;
+   margin-top: 25%;
+   margin-bottom: 7%;
+}
+
+#mailto-link > a{
+   color: #FFF !important;
+   font-size: 22px;
+   margin-bottom: 10%;
+   text-decoration: none;
+   letter-spacing: 1px;
 }
 
 /* Begin Media Queries*/
@@ -575,17 +677,23 @@ hr {
 
    #banner-ind-reuniones {
       width: 90% !important;
-      max-width: 90% !important; 
+      max-width: 90% !important;
    }
 }
 
-@media screen and (min-width: 1024) and (max-width: 1439) {
+@media screen and (min-width: 1024px) and (max-width: 1439px) {
 
    #banner-ind-reuniones {
       width: 90% !important;
-      max-width: 90% !important; 
+      max-width: 90% !important;
    }
 }
 
+@media (min-width: 1440px) {
+
+   #container-full-post{
+      max-width: 95% !important;
+   }
+}
 
 /* Contacto */

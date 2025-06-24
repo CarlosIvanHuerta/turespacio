@@ -21,7 +21,7 @@
                </div>
 
                <div class="col-xs-7 col-md-7">
-                  <!-- Newsletter -->
+                  <!-- Newsletter -- >
                   <div style="padding:5em 0;"></div>
                   <form class="row g-3 mb-3 mt-4">
                      <p class="mb-0 pt-0" id="newsletter-title">NEWSLETTER</p>
@@ -36,6 +36,8 @@
                         <button type="submit" class="btn btn-primary mb-3" id="newsletter-join-action">Únete</button>
                      </div>
                   </form>
+                  -->
+                  <script src=https://www.incubatour.com/forms/2149124854/embed.js></script>
 
                </div>
             </div>

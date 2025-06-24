@@ -1,0 +1,95 @@
+.container-post-category{
+   margin: 15% 0%;
+   max-width: 100%;
+}
+
+.custom-row-post{
+   margin-bottom: 2% !important;
+}
+
+.img-cover-cat-mex,
+.img-cover-cat-tips,
+.img-cover-cat-mundo,
+.img-cover-cat-que-hacer{
+   max-width: 100%;
+   background-size: cover;
+   background-position: center;
+}
+
+.cover-category{
+   margin-bottom: 5% !important;
+   margin-top: 3% !important;
+}
+
+.img-card-container-category {
+  width: 100% !important;
+  height: 200px !important; /* ajusta el alto según lo que necesites */
+  overflow: hidden !important;
+  position: relative !important;
+}
+
+.img-card-carousel-category {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: center !important;
+  display: block !important;
+}
+
+.link-read-more {
+   color: #FFF !important;
+   background-color: #78B53C !important;
+   border: 1px solid #78B53C !important;
+   font-weight: 600 !important;
+   text-decoration: none !important;
+   padding: 2px 5px !important;
+   border-radius: 10px !important;
+   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) !important;
+   display: flex !important;
+   flex-direction: column !important;
+   justify-content: center !important;
+   align-items: center !important;
+   text-align: center !important;
+   width: 30% !important;
+   margin: 0 auto !important;
+   transition: all 0.3s ease !important;
+}
+
+.link-read-more:hover {
+   background-color: #7fb00b !important;
+   border-color: #7fb00b !important;
+   color: #FFF !important;
+   text-decoration: none !important;
+   cursor: pointer !important;
+}
+
+.card-title-carousel-mx {
+   font-weight: bold;
+   color: #065292 !important;
+   text-align: center;
+   margin-bottom: 5px;
+   font-size: 16px !important;
+}
+
+.card-text-carousel-mx {
+   color: #78B53C !important;
+   text-align: center;
+   font-size: 14px !important;
+   margin-bottom: 25px;
+}
+
+#load-more-mexico{
+   background-color: #78B53C !important;
+   border-color: #78B53C !important;
+   color: #FFF !important;
+   text-decoration: none !important;
+   cursor: pointer !important;
+   transition: all 0.3s ease !important;
+   border-radius: 20px !important;
+   width: 12% !important;
+}
+
+#load-more-mexico:hover{
+   background-color: #40671a !important;
+   border-color: #40671a !important;
+}
