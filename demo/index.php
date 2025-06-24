@@ -59,7 +59,7 @@
    </div>
 
    <!-- Footer -->
-   <footer class="bg-dark text-white text-center py-4 mt-5">
+   <footer class="bg-dark text-white text-center py-4">
       <p>© Turespacio <?php echo(date('Y')) ?></p>
    </footer>
 

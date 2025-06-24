@@ -1,6 +1,6 @@
 <!-- Tips de Viaje -->
 <div class="container py-1 mt-2 mb-2">
-   <h2 class="likehr ext-center mb-4 mt-5" id="carrousel-tips-travel">Tips de Viaje &nbsp;&nbsp;&nbsp;<img src="assets/tips.png" style="width: 5%"> </h2>
+   <h2 class="likehr ext-center mb-4 mt-5" id="carrousel-tips-travel">&nbsp;&nbsp;&nbsp;<img src="assets/tips.png" style="width: 5%">&nbsp;&nbsp;&nbsp;Tips de Viaje&nbsp;&nbsp;&nbsp;</h2>
 </div>
 <div class="slider">
    <input type="radio" name="testimonial" id="t-1" />

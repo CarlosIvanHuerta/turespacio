@@ -1,6 +1,6 @@
 <?php
 declare(strict_types=1);
-header('Content-Type: application/json');
+#header('Content-Type: application/json');
 
 require_once 'data-env.php';
 
@@ -77,6 +77,9 @@ class Database
                p.post_title, 
                p.post_date,
                p.post_content,
+               t.slug,
+               t.name,
+               t.term_id,
                imguid.meta_value AS thumbnail_id,
                imgguid.guid AS thumbnail_url
             FROM wp_posts p
@@ -254,6 +257,413 @@ class Database
             'timer' => 0,
             'data' => [],
             'message' => 'Error en la consulta getPostSlidesMain | ' . $e->getMessage()
+         ];
+      }
+   }
+
+   public function getPostBySlug($slut): array {
+
+      try {
+
+         $startTime = microtime(true); // ⏱ Marca de inicio
+         $conn = $this->conn;
+
+         // Query con placeholders
+         $query = "
+            SELECT 
+            p.ID,
+            p.post_title,
+            p.post_content,
+            p.post_date,
+            u.display_name AS author,
+            GROUP_CONCAT(t.name SEPARATOR ', ') AS categories,
+            img.guid AS featured_image
+            FROM wp_posts p
+            -- Autor
+            JOIN wp_users u ON p.post_author = u.ID
+            -- Relación con taxonomías
+            LEFT JOIN wp_term_relationships tr ON p.ID = tr.object_id
+            LEFT JOIN wp_term_taxonomy tt ON tr.term_taxonomy_id = tt.term_taxonomy_id
+            LEFT JOIN wp_terms t ON tt.term_id = t.term_id AND tt.taxonomy = 'category'
+            -- Imagen destacada
+            LEFT JOIN wp_postmeta pm ON pm.post_id = p.ID AND pm.meta_key = '_thumbnail_id'
+            LEFT JOIN wp_posts img ON img.ID = pm.meta_value
+            WHERE p.post_status = 'publish'
+            AND p.post_type = 'post'
+            AND p.post_name = :slut
+            GROUP BY p.ID
+            LIMIT 1;
+         ";
+
+         $stmt = $conn->prepare($query);
+         $stmt->execute([$slut]);
+         $post = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+         $rowCount = count($post); // Cantidad de resultados
+         $duration = round(microtime(true) - $startTime, 4);
+
+         return[
+            'success' => true,
+            'counter' => $rowCount,
+            'timer' => $duration,
+            'post' => $post
+         ];
+            
+      } catch (PDOException $e) {
+         return [
+            'success' => false,
+            'counter' => 0,
+            'timer' => 0,
+            'data' => [],
+            'message' => 'Error en la consulta getPostSlut | ' . $e->getMessage()
+         ];
+      }
+   }
+
+   // Post x Página Categoría
+   public function getPostCategoryMex(string $tax_slut, string $tax_name, int $tax_id, int $limit): array {
+
+      try {
+
+         $startTime = microtime(true); // ⏱ Marca de inicio
+         $conn = $this->conn;
+
+         $limit = (is_numeric($limit) && $limit > 0 && $limit <= 100) ? (int)$limit : 6;
+         
+         // Query con placeholders
+         $query = "
+            SELECT 
+               p.ID, 
+               p.post_name,
+               p.post_title, 
+               p.post_date,
+               p.post_content,
+               t.slug,
+               t.name,
+               t.term_id,
+               imguid.meta_value AS thumbnail_id,
+               imgguid.guid AS thumbnail_url
+            FROM wp_posts p
+            INNER JOIN wp_term_relationships tr ON p.ID = tr.object_id
+            INNER JOIN wp_term_taxonomy tt ON tr.term_taxonomy_id = tt.term_taxonomy_id
+            INNER JOIN wp_terms t ON tt.term_id = t.term_id
+            LEFT JOIN wp_postmeta imguid ON imguid.post_id = p.ID AND imguid.meta_key = '_thumbnail_id'
+            LEFT JOIN wp_posts imgguid ON imgguid.ID = imguid.meta_value AND imgguid.post_type = 'attachment'
+            WHERE p.post_status = 'publish'
+               AND p.post_type = 'post'
+               AND tt.taxonomy = 'category'
+               AND (
+                  t.slug = :slug
+                  OR t.name = :name
+                  OR t.term_id = :term_id
+               )
+            ORDER BY p.post_date DESC
+            LIMIT $limit
+            ";
+
+         $stmt = $conn->prepare($query);
+         $stmt->execute([
+            ':slug' => $tax_slut,
+            ':name' => $tax_name,
+            ':term_id' => $tax_id
+         ]);
+
+         $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
+         $rowCount = count($posts); // Cantidad de resultados
+         $duration = round(microtime(true) - $startTime, 4);
+
+         return[
+            'success' => true,
+            'counter' => $rowCount,
+            'timer' => $duration,
+            'post' => $posts
+         ];
+            
+      } catch (PDOException $e) {
+         return [
+            'success' => false,
+            'counter' => 0,
+            'timer' => 0,
+            'data' => [],
+            'message' => 'Error en la consulta getPostCategoryMex | ' . $e->getMessage()
+         ];
+      }
+   }
+
+   public function getPostCategoryTipsTravel(string $tax_slut, string $tax_name, int $tax_id, int $limit): array {
+
+      try {
+
+         $startTime = microtime(true); // ⏱ Marca de inicio
+         $conn = $this->conn;
+
+         $limit = (is_numeric($limit) && $limit > 0 && $limit <= 100) ? (int)$limit : 6;
+         
+         // Query con placeholders
+         $query = "
+            SELECT 
+               p.ID, 
+               p.post_name,
+               p.post_title, 
+               p.post_date,
+               p.post_content,
+               t.slug,
+               t.name,
+               t.term_id,
+               imguid.meta_value AS thumbnail_id,
+               imgguid.guid AS thumbnail_url
+            FROM wp_posts p
+            INNER JOIN wp_term_relationships tr ON p.ID = tr.object_id
+            INNER JOIN wp_term_taxonomy tt ON tr.term_taxonomy_id = tt.term_taxonomy_id
+            INNER JOIN wp_terms t ON tt.term_id = t.term_id
+            LEFT JOIN wp_postmeta imguid ON imguid.post_id = p.ID AND imguid.meta_key = '_thumbnail_id'
+            LEFT JOIN wp_posts imgguid ON imgguid.ID = imguid.meta_value AND imgguid.post_type = 'attachment'
+            WHERE p.post_status = 'publish'
+               AND p.post_type = 'post'
+               AND tt.taxonomy = 'category'
+               AND (
+                  t.slug = :slug
+                  OR t.name = :name
+                  OR t.term_id = :term_id
+               )
+            ORDER BY p.post_date DESC
+            LIMIT $limit
+            ";
+
+         $stmt = $conn->prepare($query);
+         $stmt->execute([
+            ':slug' => $tax_slut,
+            ':name' => $tax_name,
+            ':term_id' => $tax_id
+         ]);
+
+         $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
+         $rowCount = count($posts); // Cantidad de resultados
+         $duration = round(microtime(true) - $startTime, 4);
+
+         return[
+            'success' => true,
+            'counter' => $rowCount,
+            'timer' => $duration,
+            'post' => $posts
+         ];
+            
+      } catch (PDOException $e) {
+         return [
+            'success' => false,
+            'counter' => 0,
+            'timer' => 0,
+            'data' => [],
+            'message' => 'Error en la consulta getPostCategoryMex | ' . $e->getMessage()
+         ];
+      }
+   }
+
+   public function getPostCategoryWorld(string $tax_slut, string $tax_name, int $tax_id, int $limit): array {
+
+      try {
+
+         $startTime = microtime(true); // ⏱ Marca de inicio
+         $conn = $this->conn;
+
+         $limit = (is_numeric($limit) && $limit > 0 && $limit <= 100) ? (int)$limit : 6;
+         
+         // Query con placeholders
+         $query = "
+            SELECT 
+               p.ID, 
+               p.post_name,
+               p.post_title, 
+               p.post_date,
+               p.post_content,
+               t.slug,
+               t.name,
+               t.term_id,
+               imguid.meta_value AS thumbnail_id,
+               imgguid.guid AS thumbnail_url
+            FROM wp_posts p
+            INNER JOIN wp_term_relationships tr ON p.ID = tr.object_id
+            INNER JOIN wp_term_taxonomy tt ON tr.term_taxonomy_id = tt.term_taxonomy_id
+            INNER JOIN wp_terms t ON tt.term_id = t.term_id
+            LEFT JOIN wp_postmeta imguid ON imguid.post_id = p.ID AND imguid.meta_key = '_thumbnail_id'
+            LEFT JOIN wp_posts imgguid ON imgguid.ID = imguid.meta_value AND imgguid.post_type = 'attachment'
+            WHERE p.post_status = 'publish'
+               AND p.post_type = 'post'
+               AND tt.taxonomy = 'category'
+               AND (
+                  t.slug = :slug
+                  OR t.name = :name
+                  OR t.term_id = :term_id
+               )
+            ORDER BY p.post_date DESC
+            LIMIT $limit
+            ";
+
+         $stmt = $conn->prepare($query);
+         $stmt->execute([
+            ':slug' => $tax_slut,
+            ':name' => $tax_name,
+            ':term_id' => $tax_id
+         ]);
+
+         $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
+         $rowCount = count($posts); // Cantidad de resultados
+         $duration = round(microtime(true) - $startTime, 4);
+
+         return[
+            'success' => true,
+            'counter' => $rowCount,
+            'timer' => $duration,
+            'post' => $posts
+         ];
+            
+      } catch (PDOException $e) {
+         return [
+            'success' => false,
+            'counter' => 0,
+            'timer' => 0,
+            'data' => [],
+            'message' => 'Error en la consulta getPostCategoryMex | ' . $e->getMessage()
+         ];
+      }
+   }
+
+   public function getPostCategoryToDo(string $tax_slut, string $tax_name, int $tax_id, int $limit): array {
+
+      try {
+
+         $startTime = microtime(true); // ⏱ Marca de inicio
+         $conn = $this->conn;
+
+         $limit = (is_numeric($limit) && $limit > 0 && $limit <= 100) ? (int)$limit : 6;
+         
+         // Query con placeholders
+         $query = "
+            SELECT 
+               p.ID, 
+               p.post_name,
+               p.post_title, 
+               p.post_date,
+               p.post_content,
+               t.slug,
+               t.name,
+               t.term_id,
+               imguid.meta_value AS thumbnail_id,
+               imgguid.guid AS thumbnail_url
+            FROM wp_posts p
+            INNER JOIN wp_term_relationships tr ON p.ID = tr.object_id
+            INNER JOIN wp_term_taxonomy tt ON tr.term_taxonomy_id = tt.term_taxonomy_id
+            INNER JOIN wp_terms t ON tt.term_id = t.term_id
+            LEFT JOIN wp_postmeta imguid ON imguid.post_id = p.ID AND imguid.meta_key = '_thumbnail_id'
+            LEFT JOIN wp_posts imgguid ON imgguid.ID = imguid.meta_value AND imgguid.post_type = 'attachment'
+            WHERE p.post_status = 'publish'
+               AND p.post_type = 'post'
+               AND tt.taxonomy = 'category'
+               AND (
+                  t.slug = :slug
+                  OR t.name = :name
+                  OR t.term_id = :term_id
+               )
+            ORDER BY p.post_date DESC
+            LIMIT $limit
+            ";
+
+         $stmt = $conn->prepare($query);
+         $stmt->execute([
+            ':slug' => $tax_slut,
+            ':name' => $tax_name,
+            ':term_id' => $tax_id
+         ]);
+
+         $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
+         $rowCount = count($posts); // Cantidad de resultados
+         $duration = round(microtime(true) - $startTime, 4);
+
+         return[
+            'success' => true,
+            'counter' => $rowCount,
+            'timer' => $duration,
+            'post' => $posts
+         ];
+            
+      } catch (PDOException $e) {
+         return [
+            'success' => false,
+            'counter' => 0,
+            'timer' => 0,
+            'data' => [],
+            'message' => 'Error en la consulta getPostCategoryMex | ' . $e->getMessage()
+         ];
+      }
+   }
+
+   public function getNextPostByCategory(string $tax_slut, string $tax_name, int $tax_id, int $limit, int $offset): array {
+
+      try {
+
+         $startTime = microtime(true); // ⏱ Marca de inicio
+         $conn = $this->conn;
+
+         $limit = (is_numeric($limit) && $limit > 0 && $limit <= 100) ? (int)$limit : 6;
+         $offset = (is_numeric($offset) && $offset >= 0) ? (int)$offset : 6;
+         
+         // Query con placeholders
+         $query = "
+            SELECT 
+               p.ID, 
+               p.post_name,
+               p.post_title, 
+               p.post_date,
+               p.post_content,
+               t.slug,
+               t.name,
+               t.term_id,
+               imguid.meta_value AS thumbnail_id,
+               imgguid.guid AS thumbnail_url
+            FROM wp_posts p
+            INNER JOIN wp_term_relationships tr ON p.ID = tr.object_id
+            INNER JOIN wp_term_taxonomy tt ON tr.term_taxonomy_id = tt.term_taxonomy_id
+            INNER JOIN wp_terms t ON tt.term_id = t.term_id
+            LEFT JOIN wp_postmeta imguid ON imguid.post_id = p.ID AND imguid.meta_key = '_thumbnail_id'
+            LEFT JOIN wp_posts imgguid ON imgguid.ID = imguid.meta_value AND imgguid.post_type = 'attachment'
+            WHERE p.post_status = 'publish'
+               AND p.post_type = 'post'
+               AND tt.taxonomy = 'category'
+               AND (
+                  t.slug = :slug
+                  OR t.name = :name
+                  OR t.term_id = :term_id
+               )
+            ORDER BY p.post_date DESC
+            LIMIT $limit
+            OFFSET $offset
+            ";
+
+         $stmt = $conn->prepare($query);
+         $stmt->execute([
+            ':slug' => $tax_slut,
+            ':name' => $tax_name,
+            ':term_id' => $tax_id
+         ]);
+
+         $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
+         $rowCount = count($posts); // Cantidad de resultados
+         $duration = round(microtime(true) - $startTime, 4);
+
+         return[
+            'success' => true,
+            'counter' => $rowCount,
+            'timer' => $duration,
+            'post' => $posts
+         ];
+            
+      } catch (PDOException $e) {
+         return [
+            'success' => false,
+            'counter' => 0,
+            'timer' => 0,
+            'data' => [],
+            'message' => 'Error en la consulta getNextPostByCategory | ' . $e->getMessage()
          ];
       }
    }

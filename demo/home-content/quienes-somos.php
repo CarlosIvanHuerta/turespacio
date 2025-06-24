@@ -1,4 +1,14 @@
 <div class="container">
+
+   <div class="row">
+      <div class="col-xs-12 col-md-12 text-center">
+         <h1 class="about-us-header">¿Quiénes somos?</h1>
+         <p class="about-us-subtitle">Somos un blog de viajeros para viajeros, de esos que nos apasionan los viajes y
+lo hacemos a menudo, aquellos del tipo que buscamos hacer de cada viaje una experiencia,
+desde que compramos los boletos de avión, reservamos hotel y empacamos la mochila.</p>
+      </div>
+   </div>
+
    <div class="wrapper">
       <div class="cols">
          <div class="col" ontouchstart="this.classList.toggle('hover');">
@@ -57,7 +67,7 @@
                <div class="back">
                   <div class="inner">
                      <a href="https://www.incubatour.com/" target="_blank" rel="noopener noreferrer">
-                        <img src="assets/banners/logo_incubatour.jpeg" style="width: 220px" alt="Capacitaciones"
+                        <img src="assets/banners/logo_incubatour_v2.jpeg" style="width: 220px" alt="Capacitaciones"
                            class="img-capacitaciones-incubatour">
                      </a>
                   </div>
@@ -68,10 +78,12 @@
    </div>
 </div>
 
+<!--
 <div class="container" id="container-logo-middle">
    <div class="row">
       <div class="col-xs-12 col-md-12 text-center" style="padding: 3%">
-         <img src="assets/main-logo.png" id="banner-ind-reuniones-2" style="width: 23% !important" alt="Logo Turespacio">
+         <img src="assets/main_logo_color_v2025.svg" id="banner-ind-reuniones-2" style="width: 23% !important" alt="Logo Turespacio">
       </div>
    </div>
 </div>
+-->

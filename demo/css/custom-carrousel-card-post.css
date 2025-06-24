@@ -11,8 +11,8 @@ div#container-carousel-mexico {
 
 .link-read-more {
    color: #FFF !important;
-   background-color: #94c90d !important;
-   border: 1px solid #94c90d !important;
+   background-color: #78B53C !important;
+   border: 1px solid #78B53C !important;
    font-weight: 600 !important;
    text-decoration: none !important;
    padding: 2px 5px !important;
@@ -51,14 +51,14 @@ div#container-carousel-mexico {
 
 .card-title-carousel-mx {
    font-weight: bold;
-   color: #0090b9 !important;
+   color: #065292 !important;
    text-align: center;
    margin-bottom: 5px;
    font-size: 16px !important;
 }
 
 .card-text-carousel-mx {
-   color: #8dc020 !important;
+   color: #78B53C !important;
    text-align: center;
    font-size: 14px !important;
    margin-bottom: 25px;
@@ -199,7 +199,7 @@ div#container-carousel-mexico {
 /* Estilo Propuesta #3 */
 
 #carrousel-tips-travel {
-   color: #8dc020;
+   color: #78B53C;
 }
 
 .mycard {
@@ -210,7 +210,7 @@ div#container-carousel-mexico {
 
 .cardtitle {
    font-weight: bold;
-   color: #0090b9 !important;
+   color: #065292 !important;
    text-align: center;
    margin-bottom: 5px;
 }
@@ -228,7 +228,7 @@ div#container-carousel-mexico {
 }
 
 .carddescription {
-   color: #8dc020 !important;
+   color: #78B53C !important;
    text-align: center;
    font-size: 14px;
 }
@@ -283,7 +283,7 @@ div#container-carousel-mexico {
 }
 
 .testimonials .item p {
-   color: #0090b9;
+   color: #065292;
 }
 
 .testimonials .item h2 {
@@ -311,7 +311,7 @@ div#container-carousel-mexico {
 /* First */
 #t-1:checked~.dots label[for="t-1"] {
    transform: scale(2);
-   background-color: #1276a6;
+   background-color: #065292;
 }
 
 #t-1:checked~.dots label[for="t-2"] {
@@ -349,7 +349,7 @@ div#container-carousel-mexico {
 
 #t-2:checked~.dots label[for="t-2"] {
    transform: scale(2);
-   background-color: #1276a6;
+   background-color: #065292;
 }
 
 #t-2:checked~.dots label[for="t-3"] {
@@ -385,7 +385,7 @@ div#container-carousel-mexico {
 
 #t-3:checked~.dots label[for="t-3"] {
    transform: scale(2);
-   background-color: #1276a6;
+   background-color: #065292;
 }
 
 #t-3:checked~.dots label[for="t-4"] {
@@ -420,7 +420,7 @@ div#container-carousel-mexico {
 
 #t-4:checked~.dots label[for="t-4"] {
    transform: scale(2);
-   background-color: #1276a6;
+   background-color: #065292;
 }
 
 #t-4:checked~.dots label[for="t-5"] {
@@ -455,7 +455,7 @@ div#container-carousel-mexico {
 
 #t-5:checked~.dots label[for="t-5"] {
    transform: scale(2);
-   background-color: #1276a6;
+   background-color: #065292;
 }
 
 #t-5:checked~.testimonials label[for="t-1"] {

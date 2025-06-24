@@ -5,8 +5,8 @@
 
          <div class="container">
             <!-- Logo -->
-            <a class="navbar-brand d-flex align-items-center" href="#">
-               <img src="assets/main-logo.png" alt="Logo" height="35" class="me-2">
+            <a class="navbar-brand d-flex align-items-center" href="/demo">
+               <img src="assets/main_logo_color_v2025.svg" alt="Logo">
             </a>
 
             <!-- Botón hamburguesa para móviles -->
@@ -20,22 +20,22 @@
                <ul class="navbar-nav navbar-nav gap-3">
 
                   <li class="nav-item ms-md-4" id="to_tips_travel">
-                     <a class="nav-link label-navbar-to" href="#">Tips de Viaje</a>
+                     <a class="nav-link label-navbar-to" href="tips-de-viaje">Tips de Viaje</a>
                   </li>
 
                   <li class="nav-item ms-md-4" id="to_mexico">
-                     <a class="nav-link label-navbar-to" href="#">México</a>
+                     <a class="nav-link label-navbar-to" href="mexico">México</a>
                   </li>
 
                   <li class="nav-item ms-md-4" id="to_world">
-                     <a class="nav-link label-navbar-to" href="#">El Mundo</a>
+                     <a class="nav-link label-navbar-to" href="el-mundo">El Mundo</a>
                   </li>
                   <li class="nav-item ms-md-4" id="to_to_do">
-                     <a class="nav-link label-navbar-to" href="#">Qué Hacer</a>
+                     <a class="nav-link label-navbar-to" href="que-hacer">Qué Hacer</a>
                   </li>
 
                   <li class="nav-item ms-md-4" id="to_contact">
-                     <a class="nav-link label-navbar-to" href="#">Contacto</a>
+                     <a class="nav-link label-navbar-to" href="contacto">Contacto</a>
                   </li>
                </ul>
             </div>
