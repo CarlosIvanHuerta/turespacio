@@ -17,6 +17,8 @@ const props = defineProps({
   placeh: { default: 'Agregue un place holder', type: String, required: true },
   selectType: { default: 'catalogos', type: String, required: true },
   appendToBody: { default: false, type: Boolean, required: true },
+  defaultValue: { default: false, type: Boolean, required: true },
+  valueDefault: { default: {}, type: Object, required: true },
 })
 
 watch(selectedOption, (newselectedOption) => {
@@ -41,26 +43,10 @@ const getData = async () => {
   })
       .then(({ data }) => {
         let datos = data.data
-        let cont = 0
-        datos.forEach((v, k) => {
-          if (!v.hasOwnProperty("label")){
-            if(v.hasOwnProperty("Inventario") ){
-              datos[cont]['label'] = v.Inventario
-            } else  if(v.hasOwnProperty("NumeroPiso") ){
-
-              datos[cont]['label'] = v.Comentario
-            }else  if(v.hasOwnProperty("Folio") ){
-
-              datos[cont]['label'] = v.Folio
-            }
-            else {
-              datos[cont]['label'] = v.Nombre
-            }
-            datos[cont]['value'] = parseInt(v.Id)
-          }
-          cont ++
-        })
         optionsP.value = datos
+        if (props.defaultValue) {
+          selectedOption.value = props.valueDefault
+        }
       })
 }
 

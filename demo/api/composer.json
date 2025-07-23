@@ -5,7 +5,8 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Admin\\Api\\": "src/"
+            "Admin\\Api\\": "src/",
+            "utils\\": "utils/"
         }
     },
     "authors": [

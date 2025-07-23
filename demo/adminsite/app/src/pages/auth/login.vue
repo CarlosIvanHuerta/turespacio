@@ -129,7 +129,7 @@ useHead({
                 <div class="column">
                   <img
                     class="hero-image"
-                    src="/images/photo/login/imageone.jpg"
+                    src="/images/svg/maleta.svg"
                     alt="logoviaje"
                   >
                 </div>

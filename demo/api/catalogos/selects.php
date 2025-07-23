@@ -100,3 +100,22 @@ if ($data->select == 'postStatusAndVisibility') {
     header('Content-Type: application/json; charset=utf-8');
     echo json_encode(['data' => $translatedData]); // Envía la respuesta en JSON
 }
+if ($data->select == 'tagsPost') {
+    $dataR = \WpTermsQuery::create()
+        ->select(['value', 'label'])
+        ->addJoin(
+            'wp_terms.term_id', // Columna de la tabla principal
+            'wp_term_taxonomy.term_id', // Columna de la tabla secundaria
+            \Propel\Runtime\ActiveQuery\Criteria::INNER_JOIN // Tipo de unión
+        )
+        ->where("wp_term_taxonomy.taxonomy = 'post_tag'") // Filtrar por taxonomía
+        ->withColumn('wp_terms.term_id', 'value') // Asignar el ID como value
+        ->withColumn('wp_terms.name', 'label') // Asignar el nombre como label
+        ->find()
+        ->toArray();
+
+    // Retornar las etiquetas como respuesta JSON
+    http_response_code(200);
+    header('Content-Type: application/json; charset=utf-8');
+    echo json_encode(['data' => $dataR]);
+}
