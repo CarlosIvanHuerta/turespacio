@@ -28,9 +28,12 @@
    <!-- Popper desde CDN -->
    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.8/umd/popper.min.js" crossorigin="anonymous"></script>
 
+   <!-- NotifyJS -->
+   <script src="https://cdn.jsdelivr.net/npm/notifyjs-browser@0.4.2/dist/notify.js"></script>
+
    <!-- Custom Files JS -->
    <script src="js/custom-navbar.js"></script>
-   <script src="js/custom-home.js"></script>
+   <!--<script src="js/custom-home.js"></script>-->
    <script src="js/call-functions-home.js"></script>
 
 </head>
@@ -62,6 +65,16 @@
    <footer class="bg-dark text-white text-center py-4">
       <p>© Turespacio <?php echo(date('Y')) ?></p>
    </footer>
+
+   <!-- Google tag (gtag.js) -->
+   <script async src="https://www.googletagmanager.com/gtag/js?id=G-79W7XS67VC"></script>
+   <script>
+   window.dataLayer = window.dataLayer || [];
+   function gtag(){dataLayer.push(arguments);}
+   gtag('js', new Date());
+
+   gtag('config', 'G-79W7XS67VC');
+   </script>
 
 </body>
 

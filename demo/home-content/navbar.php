@@ -5,7 +5,7 @@
 
          <div class="container">
             <!-- Logo -->
-            <a class="navbar-brand d-flex align-items-center" href="/demo">
+            <a class="navbar-brand d-flex align-items-center" href="/">
                <img src="assets/main_logo_color_v2025.svg" alt="Logo">
             </a>
 

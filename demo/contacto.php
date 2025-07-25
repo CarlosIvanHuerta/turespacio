@@ -47,7 +47,7 @@
                   <div class="messages-contact">
                      <p id="contact-pgf-1">Te decimos a dónde ir</p>
                      <p id="contact-pgf-2">y cómo no perderte en el intento</p>
-                     <a href="https://wa.me/+525518180412" id="message-whatsapp" class="btn btn-primary">
+                     <a href="https://wa.me/525518180412" id="message-whatsapp" class="btn btn-primary">
                         <i class="fa-brands fa-whatsapp"></i> WhatsApp
                      </a>
                   </div>
@@ -73,6 +73,16 @@
          $('#page-loader').fadeOut()
       }, 1500);
    })
+   </script>
+
+   <!-- Google tag (gtag.js) -->
+   <script async src="https://www.googletagmanager.com/gtag/js?id=G-79W7XS67VC"></script>
+   <script>
+   window.dataLayer = window.dataLayer || [];
+   function gtag(){dataLayer.push(arguments);}
+   gtag('js', new Date());
+
+   gtag('config', 'G-79W7XS67VC');
    </script>
 
 </body>

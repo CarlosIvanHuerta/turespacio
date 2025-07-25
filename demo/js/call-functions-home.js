@@ -249,6 +249,45 @@ const truncateText = (htmlContent, maxLength) => {
    return text.length > maxLength ? text.substring(0, maxLength) + '...' : text;
 }
 
+const sendEmail = () => {
+   try {
+
+      const name = document.getElementById('name').value ?? null
+      const email = document.getElementById('email').value ?? null
+      const message = document.getElementById('message').value ?? null
+
+      if ( !name || !email || !message ) {
+         return false
+      }
+
+      const params = new URLSearchParams({
+         stage: 'sendEmailData',
+         name,
+         email,
+         message,
+      });
+
+      return fetch(`conx/functions-email.php?${params.toString()}`)
+         .then(response => response.json())
+         .then(data => {
+            if (data.success) {
+               console.log(data)
+               console.log('Correo enviado correctamente');
+               document.getElementById("contact-form").reset();
+               $.notify("¡Correo enviado correctamente!", "success");
+            } else {
+               console.error('Fallo en la conexión:', data.message);
+            }
+         })
+         .catch(error => {
+            console.error('Error en sendEmail al realizar request: ', error);
+         });
+      
+   } catch (error) {
+      console.error('Error al enviar el correo:', error);
+   }
+}
+
 // Llamadas de Inicialización...
 $(() => {
 

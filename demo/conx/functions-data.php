@@ -1,6 +1,7 @@
 <?php
 ini_set('display_errors', 0); // No mostrar errores PHP al usuario
 error_reporting(E_ALL); // Registrar todos los errores
+date_default_timezone_set('America/Mexico_City');
 header("Content-Type: application/json");
 require_once "access-db.php";
 
@@ -83,6 +84,13 @@ if (isset($_GET["stage"])) {
             $limit    = isset($_GET["limit"]) ? (int)$_GET["limit"] : 3;
             $offset   = isset($_GET["offset"]) ? (int)$_GET["offset"] : 6;
             $result = $db->getNextPostByCategory($tax_slut, $tax_name, $tax_id, $limit, $offset);
+            echo json_encode($result);
+            break;
+         case "sendEmailData":
+            $name = isset($_GET["name"]) ? $_GET["name"] : null;
+            $email = isset($_GET["email"]) ? $_GET["email"] : null;
+            $message   = isset($_GET["message"]) ? $_GET["message"] : 1;
+            $result = $db->sendEmailContact($name, $email, $message);
             echo json_encode($result);
             break;
 

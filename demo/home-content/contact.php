@@ -21,9 +21,9 @@
                      value="" required>
                </div>
             </div>
-            <textarea class="form-control" rows="7" placeholder="Mensaje" name="message"
+            <textarea class="form-control" rows="7" placeholder="Mensaje" name="message" id="message" 
                required></textarea>
-            <button class="btn btn-primary send-button" id="submit" type="submit" value="envio">
+            <button class="btn btn-primary send-button" id="submit" type="button" value="envio" onclick="sendEmail()">
                <div class="alt-send-button">
                   <i class="fa fa-paper-plane"></i><span class="send-text">¡Enviar!</span>
                </div>
