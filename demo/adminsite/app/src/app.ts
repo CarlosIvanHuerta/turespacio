@@ -15,6 +15,10 @@ import 'vue-select/dist/vue-select.css'
 import { ServerTable, ClientTable } from 'v-tables-3'
 import Datepicker from '@vuepic/vue-datepicker'
 import '@vuepic/vue-datepicker/dist/main.css'
+import Highcharts from 'highcharts'
+import HighchartsVue from 'highcharts-vue'
+import exporting from 'highcharts/modules/exporting'
+import exportingData from 'highcharts/modules/export-data'
 
 const plugins = import.meta.glob<{ default?: VueroPlugin }>('./plugins/*.ts', {
   eager: true,
@@ -34,8 +38,10 @@ export async function createApp(event?: H3Event) {
     : createClientHead({
         plugins: [InferSeoMetaPlugin()],
       })
-
+    exporting(Highcharts)
+    exportingData(Highcharts)
   app.use(head)
+    app.use(HighchartsVue, { tagName: 'highchartsg' })
     app.use(ClientTable,{},'bulma')
     app.use(ServerTable,{},'bulma')
     app.component('Datepicker', Datepicker)

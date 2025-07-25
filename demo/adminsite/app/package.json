@@ -126,6 +126,8 @@
     "v-calendar": "3.0.3",
     "vee-validate": "4.15.0",
     "vivus": "0.4.6",
+      "highcharts": "^11.4.1",
+      "highcharts-vue": "^2.0.1",
     "vue": "3.5.13",
     "vue-accessible-color-picker": "5.2.0",
     "vue-i18n": "11.1.2",

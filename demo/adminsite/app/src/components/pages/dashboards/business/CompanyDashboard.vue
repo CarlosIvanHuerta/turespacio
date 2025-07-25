@@ -15,7 +15,25 @@ const { sharingOptions } = useSharingChart()
 const { usersOptions } = useUsersChart()
 const datepicker = ref<DatePickerInstance>(null)
 const date = ref(new Date());
-
+const graficaPie = ref(null);
+const datosUsuarios = ref({
+  nuevos: 0,
+  activos: 0
+})
+const postTurespacioData = ref([])
+const postTurespacio = ref({
+  total: 0,
+  publicados: 0,
+  pendientes: 0,
+  programados: 0,
+})
+const datosGenerales = ref({
+  vistasPagina: 0,
+  scroll: 0,
+  primeraVisita: 0,
+  usuariosEnganchados: 0,
+  sesionesIniciadas: 0,
+})
 
 
 
@@ -31,6 +49,8 @@ const handleDate = async (dates: Date[]) => {
     await getVistasPantallas()
     await getNewUsers()
     await getDataGeneral()
+    graficaPie.value.updateChart()
+    await getPosts()
   } else {
     Horario.value = []
   }
@@ -44,7 +64,7 @@ const getSessiones = async() => {
         Authorization: `Bearer ${token.value}` // Asumiendo que el token está en localStorage
       }
     })
-    console.log(response)
+    //console.log(response)
   }
   catch (error) {
     // Manejar errores si la solicitud falla
@@ -62,7 +82,7 @@ const getVistasPantallas = async() => {
         Authorization: `Bearer ${token.value}` // Asumiendo que el token está en localStorage
       }
     })
-    console.log(response)
+    //console.log(response)
   }
   catch (error) {
     // Manejar errores si la solicitud falla
@@ -80,7 +100,46 @@ const getNewUsers = async() => {
         Authorization: `Bearer ${token.value}` // Asumiendo que el token está en localStorage
       }
     })
-    console.log(response)
+    //console.log(response)
+    datosUsuarios.value.activos = response.data.activeUsers.reduce((acumulador, numero) => acumulador + numero, 0)
+    datosUsuarios.value.nuevos = response.data.newUsers.reduce((acumulador, numero) => acumulador + numero, 0)
+  }
+  catch (error) {
+    // Manejar errores si la solicitud falla
+    console.error(error);
+  }
+}
+const getPosts = async() => {
+  try {
+    // Enviar solicitud POST al backend
+    const response = await api.post('/analytics/postWordPress', {
+      inicio: Horario.value[0],
+      fin: Horario.value[1],
+    },{
+      headers: {
+        Authorization: `Bearer ${token.value}` // Asumiendo que el token está en localStorage
+      }
+    })
+    postTurespacio.value.total = response.data.total
+    postTurespacio.value.publicados = response.data.publicados
+    postTurespacio.value.pendientes = response.data.pendientes
+    postTurespacio.value.programados = response.data.programados
+  }
+  catch (error) {
+    // Manejar errores si la solicitud falla
+    console.error(error);
+  }
+}
+const getPostsData = async() => {
+  try {
+    // Enviar solicitud POST al backend
+    const response = await api.post('/analytics/postWordPressData', {},{
+      headers: {
+        Authorization: `Bearer ${token.value}` // Asumiendo que el token está en localStorage
+      }
+    })
+    postTurespacioData.value = response.data.posts
+
   }
   catch (error) {
     // Manejar errores si la solicitud falla
@@ -98,7 +157,12 @@ const getDataGeneral = async() => {
         Authorization: `Bearer ${token.value}` // Asumiendo que el token está en localStorage
       }
     })
-    console.log(response)
+    //console.log(response)
+    datosGenerales.value.vistasPagina = response.data.eventos.find(evento => evento.nombre === "page_view")?.conteo || 0
+    datosGenerales.value.scroll = response.data.eventos.find(evento => evento.nombre === "scroll")?.conteo || 0
+    datosGenerales.value.primeraVisita = response.data.eventos.find(evento => evento.nombre === "first_visit")?.conteo || 0
+    datosGenerales.value.usuariosEnganchados = response.data.eventos.find(evento => evento.nombre === "user_engagement")?.conteo || 0
+    datosGenerales.value.sesionesIniciadas = response.data.eventos.find(evento => evento.nombre === "session_start")?.conteo || 0
   }
   catch (error) {
     // Manejar errores si la solicitud falla
@@ -142,11 +206,12 @@ onMounted(async () => {
     monday.toISOString().split('T')[0], // Lunes
     sunday.toISOString().split('T')[0] // Domingo
   ]
-  console.log(Horario.value[0])
-  console.log(Horario.value[1])
   await getVistasPantallas()
   await getNewUsers()
   await getDataGeneral()
+  await getPosts()
+  graficaPie.value.updateChart()
+  await getPostsData()
 })
 </script>
 
@@ -187,39 +252,73 @@ onMounted(async () => {
             aria-hidden="true"
             class="lnil lnil-users-alt is-dark-primary"
           />
-          <span class="dark-inverted">162</span>
-          <p>New Users</p>
+          <span class="dark-inverted">{{ datosUsuarios.nuevos }}</span>
+          <p>Usuarios Nuevos</p>
         </div>
       </div>
       <div class="header-item is-dark-bordered-12">
         <div class="item-inner">
           <i
             aria-hidden="true"
-            class="lnil lnil-diamond-alt is-dark-primary"
+            class="lnil lnil-user-alt-1 is-dark-primary"
           />
-          <span class="dark-inverted">$1,835.41</span>
-          <p>Daily Income</p>
+          <span class="dark-inverted">{{ datosUsuarios.activos }}</span>
+          <p>Usuarios Activos</p>
         </div>
       </div>
       <div class="header-item is-dark-bordered-12">
         <div class="item-inner">
           <i
             aria-hidden="true"
-            class="lnil lnil-briefcase-alt is-dark-primary"
+            class="lnil lnil-page is-dark-primary"
           />
-          <span class="dark-inverted">378</span>
-          <p>Completed Projects</p>
+          <span class="dark-inverted">{{ datosGenerales.vistasPagina }}</span>
+          <p>Paginas Vistas</p>
         </div>
       </div>
       <div class="header-item is-dark-bordered-12">
         <div class="item-inner">
           <i
             aria-hidden="true"
-            class="lnil lnil-ticket is-dark-primary"
+            class="lnil lnil-mouse is-dark-primary"
           />
-          <span class="dark-inverted">192</span>
-          <p>Active Tickets</p>
+          <span class="dark-inverted">{{ datosGenerales.scroll }}</span>
+          <p>Scroll pagína</p>
         </div>
+      </div>
+    </div>
+    <div class="company-header is-dark-card-bordered is-dark-bg-6">
+      <div class="header-item is-dark-bordered-12">
+        <div class="item-inner">
+          <i
+            aria-hidden="true"
+            class="lnil lnil-home is-dark-primary"
+          />
+          <span class="dark-inverted">{{ datosGenerales.primeraVisita }}</span>
+          <p>Primera Visita</p>
+        </div>
+      </div>
+      <div class="header-item is-dark-bordered-12">
+        <div class="item-inner">
+          <i
+            aria-hidden="true"
+            class="lnil lnil-star-empty is-dark-primary"
+          />
+          <span class="dark-inverted">{{ datosGenerales.sesionesIniciadas }}</span>
+          <p>Sesiones</p>
+        </div>
+      </div>
+      <div class="header-item is-dark-bordered-12">
+        <div class="item-inner">
+          <i
+            aria-hidden="true"
+            class="lnil lnil-block-user is-dark-primary"
+          />
+          <span class="dark-inverted">{{ datosGenerales.usuariosEnganchados }}</span>
+          <p>Usuarios Enganchados</p>
+        </div>
+      </div>
+      <div class="header-item is-dark-bordered-12">
       </div>
     </div>
 
@@ -246,19 +345,25 @@ onMounted(async () => {
             <div class="company-stat">
               <div>
                 <span>Posts</span>
-                <span class="dark-inverted">864</span>
+                <span class="dark-inverted">{{ postTurespacio.total }}</span>
               </div>
             </div>
             <div class="company-stat">
               <div>
-                <span>Projects</span>
-                <span class="dark-inverted">261</span>
+                <span>Publicados</span>
+                <span class="dark-inverted">{{ postTurespacio.publicados }}</span>
               </div>
             </div>
             <div class="company-stat">
               <div>
-                <span>Suscriptores</span>
-                <span class="dark-inverted">32K</span>
+                <span>Pendientes</span>
+                <span class="dark-inverted">{{ postTurespacio.pendientes }}</span>
+              </div>
+            </div>
+            <div class="company-stat">
+              <div>
+                <span>Programados</span>
+                <span class="dark-inverted">{{ postTurespacio.programados }}</span>
               </div>
             </div>
           </div>
@@ -334,19 +439,15 @@ onMounted(async () => {
           class="gauge-widget"
           straight
         >
-          <template #header>
-            <UIWidgetToolbarDropdown title="Gauge Widget" />
-          </template>
           <template #body>
             <div class="gauge-wrap">
-              <VBillboardJS
-                class="gauge-holder"
-                :options="personalScoreGaugeOptions"
-                @ready="onPersonalScoreGaugeReady"
-              />
+              <pie-chart
+                  ref="graficaPie"
+                  :datos="[datosGenerales]"
+              ></pie-chart>
             </div>
             <div class="widget-content">
-              <p>Your score has been calculated based on the latest metrics</p>
+
             </div>
           </template>
         </UIWidget>
@@ -502,21 +603,21 @@ onMounted(async () => {
         <div class="dashboard-card is-tickets">
           <div class="card-head">
             <h3 class="dark-inverted">
-              Pending Tickets
+              Últimos Post
             </h3>
             <a
               class="action-link"
               tabindex="0"
-            >View All</a>
+            >Ver Todos</a>
           </div>
 
           <div class="ticket-list">
             <!-- Ticket -->
-            <VBlock
-              title="[#45651] Cannot save changes to user profile"
-              subtitle="Iam not able to save changes I make to my user profile. When
-                  I click on the save button, it simply says failed."
-              infratitle="Updated 5 hours ago"
+            <template v-for="(items, index) in postTurespacioData">
+              <VBlock
+              :title="items.titulo + '  Autor: ' +  items.autor "
+              :subtitle="items.contenido"
+              :infratitle="items.fecha_hora"
               m-responsive
               class="is-dark-bordered-12"
             >
@@ -545,111 +646,7 @@ onMounted(async () => {
                 </VButton>
               </template>
             </VBlock>
-
-            <!-- Ticket -->
-            <VBlock
-              title="[#45783] Cannot create a new opportunity"
-              subtitle="when I try to create a new opportunity, Iam redirected to a
-                  404 page after clicking the action button."
-              infratitle="Updated 2 hours ago"
-              m-responsive
-              class="is-dark-bordered-12"
-            >
-              <template #icon>
-                <Tippy
-                  class="has-help-cursor"
-                  interactive
-                  :offset="[0, 10]"
-                  placement="top-start"
-                >
-                  <VAvatar
-                    size="medium"
-                    picture="https://media.cssninja.io/content/avatars/23.jpg"
-                  />
-                  <template #content>
-                    <UserPopoverContent :user="popovers.user23" />
-                  </template>
-                </Tippy>
-              </template>
-              <template #action>
-                <VButton
-                  color="primary"
-                  raised
-                >
-                  Manage
-                </VButton>
-              </template>
-            </VBlock>
-
-            <!-- Ticket -->
-            <VBlock
-              title="[#45723] Payment fails when using PayPal"
-              subtitle="When I try to use PayPal as a payment method, it spins
-                  forever and I get an error message after that."
-              infratitle="Updated 30 minutes ago"
-              m-responsive
-              class="is-dark-bordered-12"
-            >
-              <template #icon>
-                <Tippy
-                  class="has-help-cursor"
-                  interactive
-                  :offset="[0, 10]"
-                  placement="top-start"
-                >
-                  <VAvatar
-                    size="medium"
-                    picture="https://media.cssninja.io/content/avatars/32.jpg"
-                  />
-                  <template #content>
-                    <UserPopoverContent :user="popovers.user32" />
-                  </template>
-                </Tippy>
-              </template>
-              <template #action>
-                <VButton
-                  color="primary"
-                  raised
-                >
-                  Manage
-                </VButton>
-              </template>
-            </VBlock>
-
-            <!-- Ticket -->
-            <VBlock
-              title="[#45862] Cannot find the assets in the theme folder"
-              subtitle="I followed the documentation but Iam not able to locate the
-                  assets in the main folder. Can I get some help?"
-              infratitle="Updated 6 hours ago"
-              m-responsive
-              class="is-dark-bordered-12"
-            >
-              <template #icon>
-                <Tippy
-                  class="has-help-cursor"
-                  interactive
-                  :offset="[0, 10]"
-                  placement="top-start"
-                >
-                  <VAvatar
-                    size="medium"
-                    picture="https://media.cssninja.io/content/avatars/13.jpg"
-                  />
-                  <template #content>
-                    <UserPopoverContent :user="popovers.user13" />
-                  </template>
-                </Tippy>
-              </template>
-              <template #action>
-                <VButton
-                  color="primary"
-                  raised
-                >
-                  Manage
-                </VButton>
-              </template>
-            </VBlock>
+            </template>
           </div>
         </div>
       </div>

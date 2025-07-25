@@ -284,6 +284,7 @@ declare module 'vue' {
     PersonalDashboardV1: typeof import('./../src/components/pages/dashboards/personal/PersonalDashboardV1.vue')['default']
     PersonalDashboardV2: typeof import('./../src/components/pages/dashboards/personal/PersonalDashboardV2.vue')['default']
     PersonalDashboardV3: typeof import('./../src/components/pages/dashboards/personal/PersonalDashboardV3.vue')['default']
+    PieChart: typeof import('./../src/components/generales/pieChart.vue')['default']
     PlaceloadAvatarBaseDocumentation: typeof import('./../documentation/placeload-avatar/placeload-avatar-base-documentation.md')['default']
     PlaceloadAvatarRadiusDocumentation: typeof import('./../documentation/placeload-avatar/placeload-avatar-radius-documentation.md')['default']
     PlaceloadAvatarSizeDocumentation: typeof import('./../documentation/placeload-avatar/placeload-avatar-size-documentation.md')['default']

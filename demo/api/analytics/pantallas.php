@@ -21,7 +21,7 @@ $analytics = new AnalyticsData($client);
 // Preparar Request
 $request = new RunReportRequest([
     'dimensions' => [
-        ['name' => 'date']
+        ['name' => 'pageTitle'] // Agrupación por título
     ],
     'metrics' => [
         ['name' => 'screenPageViews']
@@ -29,24 +29,25 @@ $request = new RunReportRequest([
     'dateRanges' => [[
         'startDate' => $startDate,
         'endDate' => $endDate
+    ]],
+    'limit' => 10,
+    'orderBys' => [[
+        'metric' => ['metricName' => 'screenPageViews'],
+        'desc' => true
     ]]
 ]);
 
-// Ejecutar reporte
 $response = $analytics->properties->runReport('properties/482504441', $request);
 
-// Construir respuesta
-$datos = ['fechas' => [], 'pageViews' => []];
-
-foreach ($response->getRows() as $fila) {
-    $fecha = $fila->getDimensionValues()[0]->getValue();
-    $vistas = (int) $fila->getMetricValues()[0]->getValue();
-
-    $datos['fechas'][] = $fecha;
-    $datos['pageViews'][] = $vistas;
+// Formatear respuesta
+$datos = [];
+foreach ($response->getRows() as $row) {
+    $pagina = $row->getDimensionValues()[0]->getValue();
+    $vistas = (int) $row->getMetricValues()[0]->getValue();
+    $datos[] = ['pagina' => $pagina, 'vistas' => $vistas];
 }
 
 // Enviar JSON
 header('Content-Type: application/json');
-echo json_encode($datos);
+echo json_encode(['paginas' => $datos]);
 
