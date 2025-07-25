@@ -25,7 +25,8 @@
     "prefer-stable": true,
 
     "require": {
-        "php": "^8.3"
+        "php": "^8.3",
+        "google/apiclient": "^2.0"
     },
     "require-dev": {
         "propel/propel": "~2.0@dev"

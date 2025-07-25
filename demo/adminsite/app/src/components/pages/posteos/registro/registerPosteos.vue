@@ -178,11 +178,10 @@ onUnmounted(() => {
           <!-- Campo: Contenido del Post -->
           <div class="">
             <editor
-                api-key="3hb9nq1vetcf5g2vgmzjvvim4b52df371bxprdgd6s5bv1cw"
+                api-key="49kqjxf9ug7i5d3xlrictm8lpimlh06fd441740ywp7rx8qc"
                 v-model="content"
                 :init="editorConfig"
                 ref="editorBody"
-
             />
           </div>
 

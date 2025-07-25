@@ -12,6 +12,9 @@ import { createRouter } from '/@src/router'
 import VueroApp from '/@src/VueroApp.vue'
 import vSelect from 'vue-select'
 import 'vue-select/dist/vue-select.css'
+import { ServerTable, ClientTable } from 'v-tables-3'
+import Datepicker from '@vuepic/vue-datepicker'
+import '@vuepic/vue-datepicker/dist/main.css'
 
 const plugins = import.meta.glob<{ default?: VueroPlugin }>('./plugins/*.ts', {
   eager: true,
@@ -33,6 +36,9 @@ export async function createApp(event?: H3Event) {
       })
 
   app.use(head)
+    app.use(ClientTable,{},'bulma')
+    app.use(ServerTable,{},'bulma')
+    app.component('Datepicker', Datepicker)
   app.provide('emitter', emitter)
   const pinia = createPinia()
 

@@ -4,11 +4,107 @@ import { useUsersBarChart } from '/@src/data/dashboards/company/usersBarChart'
 import { useUsersChart } from '/@src/data/dashboards/company/usersChart'
 import { popovers } from '/@src/data/users/userPopovers'
 import { usePersonalScoreGauge } from '/@src/data/widgets/charts/personalScoreGauge'
+import type { DatePickerInstance } from '@vuepic/vue-datepicker'
 
+const api = createApi()
+const token = useUserToken()
+const Horario = ref([new Date(), new Date()])
 const { personalScoreGaugeOptions, onPersonalScoreGaugeReady } = usePersonalScoreGauge()
 const { barData, barData2, usersBarOptions } = useUsersBarChart()
 const { sharingOptions } = useSharingChart()
 const { usersOptions } = useUsersChart()
+const datepicker = ref<DatePickerInstance>(null)
+const date = ref(new Date());
+
+
+
+
+const handleDate = async (dates: Date[]) => {
+  if (dates && dates.length) {
+    Horario.value = dates.map(date => {
+      // Formatear las fechas a 'dd-MM-yyyy'
+      const day = String(date.getDate()).padStart(2, '0')
+      const month = String(date.getMonth() + 1).padStart(2, '0')
+      const year = date.getFullYear()
+      return `${year}-${month}-${day}`
+    })
+    await getVistasPantallas()
+    await getNewUsers()
+    await getDataGeneral()
+  } else {
+    Horario.value = []
+  }
+
+}
+const getSessiones = async() => {
+  try {
+    // Enviar solicitud POST al backend
+    const response = await api.post('/analytics/test', {},{
+      headers: {
+        Authorization: `Bearer ${token.value}` // Asumiendo que el token está en localStorage
+      }
+    })
+    console.log(response)
+  }
+  catch (error) {
+    // Manejar errores si la solicitud falla
+    console.error(error);
+  }
+}
+const getVistasPantallas = async() => {
+  try {
+    // Enviar solicitud POST al backend
+    const response = await api.post('/analytics/pantallas', {
+      inicio: Horario.value[0],
+      fin: Horario.value[1],
+    },{
+      headers: {
+        Authorization: `Bearer ${token.value}` // Asumiendo que el token está en localStorage
+      }
+    })
+    console.log(response)
+  }
+  catch (error) {
+    // Manejar errores si la solicitud falla
+    console.error(error);
+  }
+}
+const getNewUsers = async() => {
+  try {
+    // Enviar solicitud POST al backend
+    const response = await api.post('/analytics/usuariosNuevos', {
+      inicio: Horario.value[0],
+      fin: Horario.value[1],
+    },{
+      headers: {
+        Authorization: `Bearer ${token.value}` // Asumiendo que el token está en localStorage
+      }
+    })
+    console.log(response)
+  }
+  catch (error) {
+    // Manejar errores si la solicitud falla
+    console.error(error);
+  }
+}
+const getDataGeneral = async() => {
+  try {
+    // Enviar solicitud POST al backend
+    const response = await api.post('/analytics/dataGeneral', {
+      inicio: Horario.value[0],
+      fin: Horario.value[1],
+    },{
+      headers: {
+        Authorization: `Bearer ${token.value}` // Asumiendo que el token está en localStorage
+      }
+    })
+    console.log(response)
+  }
+  catch (error) {
+    // Manejar errores si la solicitud falla
+    console.error(error);
+  }
+}
 onMounted(async () => {
   setTimeout(() => {
     usersBarOptions.series = [
@@ -27,11 +123,63 @@ onMounted(async () => {
       },
     ]
   }, 2500)
+  // Obtener fecha actual
+  const today = new Date()
+
+  // Calcular el lunes de esta semana
+  const dayOfWeek = today.getDay() // Día de la semana (0 - Domingo, 1 - Lunes, ..., 6 - Sábado)
+  const mondayOffset = dayOfWeek === 0 ? -6 : (1 - dayOfWeek) // Si hoy es domingo, retrocede 6 días; si no, ajusta al lunes
+  const monday = new Date(today)
+  monday.setDate(today.getDate() + mondayOffset)
+
+  // Calcular el domingo de esta semana
+  const sundayOffset = dayOfWeek === 0 ? 0 : (7 - dayOfWeek)
+  const sunday = new Date(today)
+  sunday.setDate(today.getDate() + sundayOffset)
+
+  // Asignar las fechas formateadas al array Horario
+  Horario.value = [
+    monday.toISOString().split('T')[0], // Lunes
+    sunday.toISOString().split('T')[0] // Domingo
+  ]
+  console.log(Horario.value[0])
+  console.log(Horario.value[1])
+  await getVistasPantallas()
+  await getNewUsers()
+  await getDataGeneral()
 })
 </script>
 
 <template>
   <div class="business-dashboard company-dashboard">
+    <div class="columns">
+      <div class="column is-4"></div>
+      <div class="column is-4  has-text-centered">
+        <VField label="Seleccione un rango de fechas">
+          <VControl :is-valid="Horario.length > 1" :has-error="Horario.length < 1">
+            <!-- <VInput class="is-uppercase" v-model="Horario" type="text" placeholder="Ej: 09:00 a 10:00 hrs" /> -->
+            <Datepicker
+                ref="datepicker"
+                v-model="Horario"
+                cancel-text="Cancelar"
+                select-text="Seleccione"
+                :enable-time-picker="false"
+                :disable-time-range-validation="true"
+                range
+                :week-numbers="true"
+                placeholder="Seleccione el rango de fechas para generar el reporte"
+                close-on-select
+                @update:model-value="handleDate"
+                :format="'yyyy-MM-dd'"
+            />
+          </VControl>
+          <span v-if="Horario.length < 1" class="help is-danger">Seleccione el rango de fechas</span>
+          <br>
+          <span class="is-size-4 title">Datos obtenidos de google Analytics</span>
+        </VField>
+      </div>
+      <div class="column is-4"></div>
+    </div>
     <div class="company-header is-dark-card-bordered is-dark-bg-6">
       <div class="header-item is-dark-bordered-12">
         <div class="item-inner">
@@ -80,28 +228,18 @@ onMounted(async () => {
         <div class="dashboard-card is-company">
           <VAvatar
             size="big"
-            picture="https://media.cssninja.io/content/photos/brands/udemy.svg"
-            picture-dark="https://media.cssninja.io/content/photos/brands/udemy-dark.svg"
+            picture="/images/svg/logoturespaci.svg"
+            picture-dark="/images/svg/logoturespaci.svg"
           >
-            <template #badge>
-              <button class="button icon-button is-circle is-dark-outlined">
-                <span class="icon is-small">
-                  <VIcon
-                    icon="lucide:plus"
-                  />
-                </span>
-              </button>
-            </template>
           </VAvatar>
 
           <h3 class="dark-inverted">
-            U Learning
+            Turespacio
           </h3>
-          <p>Online Courses</p>
+          <p>Datos de posts</p>
           <div class="description">
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed fac ista esse
-              non inportuna.
+              Los datos recolectados, son obtenidos de la base de datos, asi como las fechas seleccionadas al inicio de la pagina.
             </p>
           </div>
           <div class="company-stats is-dark-bordered-12">
@@ -119,7 +257,7 @@ onMounted(async () => {
             </div>
             <div class="company-stat">
               <div>
-                <span>Followers</span>
+                <span>Suscriptores</span>
                 <span class="dark-inverted">32K</span>
               </div>
             </div>

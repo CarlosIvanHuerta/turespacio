@@ -211,6 +211,8 @@ declare module 'vue-router/auto-routes' {
     '/navbar/maps-1': RouteRecordInfo<'/navbar/maps-1', '/navbar/maps-1', Record<never, never>, Record<never, never>>,
     '/navbar/maps-2': RouteRecordInfo<'/navbar/maps-2', '/navbar/maps-2', Record<never, never>, Record<never, never>>,
     '/posteos': RouteRecordInfo<'/posteos', '/posteos', Record<never, never>, Record<never, never>>,
+    '/posteos/administracion': RouteRecordInfo<'/posteos/administracion', '/posteos/administracion', Record<never, never>, Record<never, never>>,
+    '/posteos/administracion/': RouteRecordInfo<'/posteos/administracion/', '/posteos/administracion', Record<never, never>, Record<never, never>>,
     '/posteos/registro': RouteRecordInfo<'/posteos/registro', '/posteos/registro', Record<never, never>, Record<never, never>>,
     '/posteos/registro/': RouteRecordInfo<'/posteos/registro/', '/posteos/registro', Record<never, never>, Record<never, never>>,
     '/roadmap': RouteRecordInfo<'/roadmap', '/roadmap', Record<never, never>, Record<never, never>>,

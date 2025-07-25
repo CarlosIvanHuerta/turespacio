@@ -4,6 +4,7 @@ $allowedOrigins = [
     'http://localhost:5173',
     'http://example.com',
     'http://another-frontend.com',
+    'https://admintr.marianay.sg-host.com',
 ];
 
 $origin = $_SERVER['HTTP_ORIGIN'] ?? '';

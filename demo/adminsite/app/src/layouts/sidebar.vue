@@ -44,7 +44,7 @@ const links = ref<SidebarItem[]>([
           children: [
             {
               label: 'Administración',
-              to: '/sidebar/dashboards/analytics',
+              to: '/posteos/administracion',
               icon: 'lnil lnil-page',
             },
             {
