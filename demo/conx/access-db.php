@@ -718,12 +718,13 @@ class Database
          $rowCount = count($posts); // Cantidad de resultados
           if ($rowCount == 0){
               $rowCount = 1;
-              $posts =
+              $posts = [
                   [
                       'id' => 0,
                       'url_externa' => 'Sin publicidad',
                       'path_img' => 'https://admintr.marianay.sg-host.com/api/uploads/images/banners/PRINCIPAL.jpg',
                       'text_important' => 'Aunciate con nostros',
+                  ]
                   ]
               ;
           }

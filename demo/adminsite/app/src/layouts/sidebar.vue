@@ -69,7 +69,7 @@ const links = ref<SidebarItem[]>([
       ],
     },
   },
-  {
+  /*{
     id: 'dashboard',
     label: 'Dashboards',
     icon: 'lucide:activity',
@@ -1308,7 +1308,7 @@ const links = ref<SidebarItem[]>([
 
     type: 'link',
     to: '/messaging-v1',
-  },
+  },*/
 ])
 
 const linksBottom = ref<SidebarItem[]>([
