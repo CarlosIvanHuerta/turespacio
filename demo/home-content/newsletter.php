@@ -1,33 +1,18 @@
+<?php
+header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+header("Cache-Control: post-check=0, pre-check=0", false);
+header("Pragma: no-cache");
+?>
 <div id="carouselExample" class="carousel slide" data-bs-ride="carousel" style="max-width: 1600px; /* Limita el ancho máximo del carrusel completo */
             width: 100%; /* Asegura que sea responsivo en pantallas más pequeñas */
             overflow: hidden; /* Evita cualquier contenido adicional fuera del contenedor */
             margin: 0 auto; /* Centra el carousel en el medio */">
-    <!-- Indicadores -->
-    <div class="carousel-indicators">
-        <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-        <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="1" aria-label="Slide 2"></button>
-        <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="2" aria-label="Slide 3"></button>
-    </div>
+    <!-- Indicadores (se llenan dinámicamente) -->
+    <div class="carousel-indicators"></div>
 
-    <!-- Contenido del carrusel -->
+    <!-- Contenido del carrusel (se llena dinámicamente) -->
     <div class="carousel-inner" style="max-height: 165px !important; /* Mantén la altura fija en el contenedor del carrusel */
-            height: auto; /* Adapta la altura al contenido */">
-        <div class="carousel-item active">
-            <img src="assets/banners/demo.jpeg" alt="Imagen 1" style="max-width: 100%; /* Extiende dinámicamente al tamaño del contenedor */
-            height: 165px !important; /* Asegúrate de mantener la proporción natural */
-            margin: 0 auto; /* Centra las imágenes horizontalmente */">
-        </div>
-        <div class="carousel-item">
-            <img src="assets/banners/IMG_1.jpg" alt="Imagen 2" style="max-width: 100%; /* Extiende dinámicamente al tamaño del contenedor */
-            height: 165px !important; /* Asegúrate de mantener la proporción natural */
-            margin: 0 auto; /* Centra las imágenes horizontalmente */">
-        </div>
-        <div class="carousel-item">
-            <img src="assets/banners/demo3.jpeg" alt="Imagen 3" style="max-width: 100%; /* Extiende dinámicamente al tamaño del contenedor */
-            height: 165px !important; /* Asegúrate de mantener la proporción natural */
-            margin: 0 auto; /* Centra las imágenes horizontalmente */">
-        </div>
-    </div>
+            height: auto; /* Adapta la altura al contenido */"></div>
 
     <!-- Controles -->
     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">

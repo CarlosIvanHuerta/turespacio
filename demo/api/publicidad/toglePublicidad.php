@@ -59,9 +59,9 @@ $data = json_decode(file_get_contents('php://input'), true);
 
 $idPost = $data['id'] ?? '';
 $estatusChange = $data['number'] ?? '';
+$dataPost = \PublicidadQuery::create()->findOneById($idPost);
+$dataPost->setEstatus($estatusChange === 1)->save();
 
-$dataPost = \WpPostsQuery::create()->findOneById($idPost);
-$dataPost->setLoadCarousel($estatusChange === 1)->setPostModified(date('Y-m-d H:i:s'))->save();
 echo json_encode([
     'success' => true,
     'message' => 'Cambio de estatus exitoso.'

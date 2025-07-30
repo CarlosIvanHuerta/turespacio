@@ -314,6 +314,7 @@ declare module 'vue' {
     ProjectsViewV3: typeof import('./../src/components/pages/layouts/projects/ProjectsViewV3.vue')['default']
     ProjectWidgetDropdown: typeof import('./../src/components/partials/dropdowns/ProjectWidgetDropdown.vue')['default']
     Promotion: typeof import('./../src/components/pages/layouts/actions/Promotion.vue')['default']
+    PublicidadTable: typeof import('./../src/components/pages/publicidad/administracion/publicidadTable.vue')['default']
     RadioOutlinedDocumentation: typeof import('./../documentation/radio/radio-outlined-documentation.md')['default']
     RadioOutlinedSquareDocumentation: typeof import('./../documentation/radio/radio-outlined-square-documentation.md')['default']
     RadioSolidDocumentation: typeof import('./../documentation/radio/radio-solid-documentation.md')['default']

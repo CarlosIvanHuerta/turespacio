@@ -27,7 +27,7 @@ const errorMessage = ref('')
 // Función para enviar los datos al backend
 const submitPost = async () => {
   errorMessage.value = ''; // Limpiar mensajes de error previos
-  console.log("entramos")
+  //console.log("entramos")
   // Validar que los campos requeridos estén completos
   if (!title.value || !content.value) {
     errorMessage.value = 'Por favor completa todos los campos obligatorios.';

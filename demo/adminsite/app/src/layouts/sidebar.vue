@@ -54,6 +54,18 @@ const links = ref<SidebarItem[]>([
             }
           ],
         },
+        {
+          type: 'collapse',
+          id: 'publicidad',
+          label: 'Publicidad',
+          children: [
+            {
+              label: 'Administracion',
+              to: '/publicidad/administracion',
+              icon: 'lnil lnil-ruler-pencil',
+            }
+          ],
+        },
       ],
     },
   },
