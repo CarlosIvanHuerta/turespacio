@@ -1,4 +1,8 @@
-<?php ini_set('display_errors', 0); // No mostrar errores PHP al usuario ?>
+<?php ini_set('display_errors', 0); // No mostrar errores PHP al usuario 
+header("Cache-Control: no-cache, no-store, must-revalidate");
+header("Pragma: no-cache");
+header("Expires: 0");
+?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -35,6 +39,7 @@
    <script src="js/custom-navbar.js"></script>
    <!--<script src="js/custom-home.js"></script>-->
    <script src="js/call-functions-home.js"></script>
+   <script src="js/call-publicidad.js"></script>
 
 </head>
 

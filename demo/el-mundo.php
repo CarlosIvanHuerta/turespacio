@@ -1,4 +1,9 @@
-<?php ini_set('display_errors', 0); // No mostrar errores PHP al usuario ?>
+<?php ini_set('display_errors', 0); // No mostrar errores PHP al usuario
+header("Cache-Control: no-cache, no-store, must-revalidate");
+header("Pragma: no-cache");
+header("Expires: 0");
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 
