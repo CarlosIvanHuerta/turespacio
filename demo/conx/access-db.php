@@ -1,7 +1,10 @@
 <?php
-declare(strict_types=1);
+#declare(strict_types=1);
 #header('Content-Type: application/json');
-
+ini_set('display_errors', 0); // No mostrar errores PHP al usuario 
+header("Cache-Control: no-cache, no-store, must-revalidate");
+header("Pragma: no-cache");
+header("Expires: 0");
 require_once 'data-env.php';
 
 class Database
@@ -260,6 +263,7 @@ class Database
                AND p.post_type = 'post'
                AND p.load_carousel = 1
                AND tt.taxonomy = 'category'
+            GROUP BY p.ID
             ORDER BY p.post_date DESC
          ";
 
@@ -744,4 +748,73 @@ class Database
          ];
       }
    }
+
+   public function getPublicidad(): array {
+
+      try {
+
+         $conn = $this->conn;
+
+         $limit = 6;
+
+         // Query con placeholders
+         $query = "
+            SELECT 
+               *
+            FROM publicidad p        
+            WHERE p.estatus = 1
+            LIMIT $limit
+            ";
+
+         $stmt = $conn->prepare($query);
+         $stmt->execute();
+         $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
+         $rowCount = count($posts); // Cantidad de resultados
+          if ($rowCount == 0){
+              $rowCount = 1;
+              $posts =$posts = [
+                  [
+                      'id' => 0,
+                      'url_externa' => 'Sin publicidad',
+                      'path_img' => 'https://admintr.marianay.sg-host.com/api/uploads/images/banners/PRINCIPAL.jpg',
+                      'text_important' => 'Aunciate con nostros',
+                  ]
+                  ]
+              ;
+          }
+         return[
+            'success' => true,
+            'counter' => $rowCount,
+            'post' => $posts
+         ];
+
+      } catch (PDOException $e) {
+         return [
+            'success' => false,
+            'counter' => 0,
+            'timer' => 0,
+            'data' => [],
+            'message' => 'Error en la consulta getNextPostByCategory | ' . $e->getMessage()
+         ];
+      }
+   }
+
+   public function registrarClickPublicidad($idPublicidad){
+    try {
+        $sql = "UPDATE publicidad SET clicks_publicidad = clicks_publicidad + 1 WHERE id = :id";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':id', $idPublicidad, PDO::PARAM_INT);
+        return $stmt->execute(); // true si se ejecuta correctamente
+    } catch (PDOException $e) {
+        error_log("Error al registrar clic: " . $e->getMessage());
+        return false;
+    }
+   }
 }
+
+#Usuario usmtcjiraflcy ha sido creado con contraseña osjg7wrdgskp PWD:: Su1t3Scr1pt@2025%
+#private $host; //= "35.209.159.244:3306";
+#private $db_name; //= "dbonxlzrrzzd3g";
+#private $username; //= "usmtcjiraflcy";
+#private $password; //= "Su1t3Scr1pt@2025%";
+#private $charset; //= "utf8mb4";

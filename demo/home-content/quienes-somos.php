@@ -9,6 +9,7 @@ desde que compramos los boletos de avión, reservamos hotel y empacamos la mochi
       </div>
    </div>
 
+   <!--
    <div class="wrapper">
       <div class="cols">
          <div class="col" ontouchstart="this.classList.toggle('hover');">
@@ -66,8 +67,8 @@ desde que compramos los boletos de avión, reservamos hotel y empacamos la mochi
                </div>
                <div class="back">
                   <div class="inner">
-                     <a href="https://www.instagram.com/conexion.turismo?igsh=MWdzeTVyMTc1NzlmdA==" target="_blank" rel="noopener noreferrer">
-                        <img src="assets/quienes-somos/Turespacio banner.svg" style="width: 220px" alt="Capacitaciones"
+                     <a href="https://www.incubatour.com/" target="_blank" rel="noopener noreferrer">
+                        <img src="assets/banners/logo_incubatour_v2.jpeg" style="width: 220px" alt="Capacitaciones"
                            class="img-capacitaciones-incubatour">
                      </a>
                   </div>
@@ -76,8 +77,9 @@ desde que compramos los boletos de avión, reservamos hotel y empacamos la mochi
          </div>
       </div>
    </div>
+   -->
 </div>
-
+<br><br><br>
 <!--
 <div class="container" id="container-logo-middle">
    <div class="row">

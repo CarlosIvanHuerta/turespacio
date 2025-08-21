@@ -1,8 +1,3 @@
-<?php
-header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
-header("Cache-Control: post-check=0, pre-check=0", false);
-header("Pragma: no-cache");
-?>
 <div id="carouselExample" class="carousel slide" data-bs-ride="carousel" style="max-width: 1600px; /* Limita el ancho máximo del carrusel completo */
             width: 100%; /* Asegura que sea responsivo en pantallas más pequeñas */
             overflow: hidden; /* Evita cualquier contenido adicional fuera del contenedor */
@@ -25,6 +20,7 @@ header("Pragma: no-cache");
     </button>
 </div>
 <br><br>
+
 <div class="pb-4 mb-4" style="background-image: url('assets/banners/lineaverde.jpg'); background-repeat: repeat-x; ">
    <div class="container" id="container-newsletter">
       <div class="row">

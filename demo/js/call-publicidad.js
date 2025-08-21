@@ -9,10 +9,10 @@ async function fetchAndRenderCarousel() {
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
-        console.log('Publicidad cargada correctamente. ssss');
+        //console.log('Publicidad cargada correctamente. ssss');
 
         const data = await response.json();
-        console.log(data);
+        //console.log(data);
         // Seleccionar elementos del DOM
         const carouselInner = document.querySelector('#carouselExample .carousel-inner');
         const carouselIndicators = document.querySelector('#carouselExample .carousel-indicators');
@@ -26,14 +26,24 @@ async function fetchAndRenderCarousel() {
             // Crear el elemento de la diapositiva
             const isActive = index === 0 ? 'active' : '';
             const carouselItem = `
-                <div class="carousel-item ${isActive}">
-                    <img src="${item.path_img}" class="d-block w-100" alt="${item.text_important}" style="max-height: 165px;">
-                    <div class="carousel-caption d-none d-md-block">
-                        <h5>${item.text_important}</h5>
-                        ${item.url_externa !== 'Sin publicidad' ? `<a href="${item.url_externa}" target="_blank" class="btn btn-primary">Ver más</a>` : ''}
-                    </div>
-                </div>
-            `;
+    <div class="carousel-item ${isActive}">
+        ${item.url_externa !== 'Sin publicidad'
+            ? `<a href="${item.url_externa}" target="_blank" onclick="registrarClick(${item.id})">`
+            : ''
+        }
+            <img src="${item.path_img}" class="d-block w-100" alt="${item.text_important}" style="max-height: 165px;">
+        ${item.url_externa !== 'Sin publicidad' ? `</a>` : ''}
+        <div class="carousel-caption d-none d-md-block">
+            <h5>${item.text_important}</h5>
+            ${item.url_externa !== 'Sin publicidad'
+                ? `<a href="${item.url_externa}" target="_blank" onclick="registrarClick(${item.id})" class="btn btn-primary">Ver más</a>`
+                : ''
+            }
+        </div>
+    </div>
+`;
+
+
             carouselInner.innerHTML += carouselItem;
 
             // Crear el indicador correspondiente
@@ -44,8 +54,23 @@ async function fetchAndRenderCarousel() {
         console.error('Error al cargar el carrusel:', error);
     }
 }
+
+// Función para enviar el ID cuando hay un clic
+function registrarClick(idPublicidad) {
+    fetch('/conx/access-publicidad.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: idPublicidad, click: true })
+    })
+    .then(response => {
+        if (!response.ok) throw new Error('Error al registrar el clic');
+        console.log(`Clic registrado para publicidad ID: ${idPublicidad}`);
+    })
+    .catch(error => console.error(error));
+}
+
 // Llamadas de Inicialización...
 $(async () => {
-    console.log('Cargando publicidad...');
+    //console.log('Cargando publicidad...');
     await fetchAndRenderCarousel()
 })

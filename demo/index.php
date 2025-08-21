@@ -39,7 +39,7 @@ header("Pragma: no-cache");
    <script src="js/custom-navbar.js"></script>
    <!--<script src="js/custom-home.js"></script>-->
    <script src="js/call-functions-home.js"></script>
-    <script src="js/call-publicidad.js"></script>
+   <script src="js/call-publicidad.js"></script>
 
 </head>
 

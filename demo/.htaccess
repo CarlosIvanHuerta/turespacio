@@ -1,10 +1,13 @@
-<IfModule mod_rewrite.c>
-    RewriteEngine On
+RewriteEngine On
+RewriteBase /
 
-       # Quitar .php de las URLs
-       RewriteCond %{REQUEST_FILENAME} !-d
-       RewriteCond %{REQUEST_FILENAME} !-f
-       RewriteCond %{REQUEST_FILENAME}.php -f
-       RewriteRule ^([^\.]+)$ $1.php [NC,L]
+# Reescribir slugs conocidos a sus archivos .php
+RewriteRule ^(index|el-mundo|mexico|que-hacer|tips-de-viaje|contacto)/?$ $1.php [L]
 
-</IfModule>
+# Si existe un archivo o carpeta física, no hacer nada
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# Todo lo demás a post.php
+RewriteRule ^([a-zA-Z0-9\-]+)/?$ post.php?slug=$1 [L,QSA]
